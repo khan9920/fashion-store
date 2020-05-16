@@ -12,6 +12,9 @@ export default class Navbar extends Component {
                 <div className="col-md-10">
                     <ul style={StylesNavBar.navListUl}>
                         <li style={StylesNavBar.linkList}>
+                            <Link to='/admin/products/add/' style={StylesNavBar.linktListA}>ADD PRODUCTS</Link>
+                        </li>
+                        <li style={StylesNavBar.linkList}>
                             <Link to='/shop' style={StylesNavBar.linktListA}>SHOP</Link>
                         </li>
                         <li style={StylesNavBar.linkList}>

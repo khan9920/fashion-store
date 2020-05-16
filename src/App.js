@@ -13,6 +13,7 @@ import Details from './components/Details';
 import Cart from './components/Cart';
 
 import _Products from './components/products/_Products';
+import _AddProduct from './components/products/_AddProduct';
 
 import Default from './components/Default';
 
@@ -29,6 +30,7 @@ class App extends Component {
             <Route path="/cart" component={Cart}></Route>
 
             <Route path="/admin/products" component={_Products}></Route>
+            <Route path="/admin/products/add" component={_AddProduct}></Route>
 
             <Route component={Default}></Route>
           </Switch>

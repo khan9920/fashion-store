@@ -15,7 +15,6 @@ export default class _ProductList extends Component {
         fetch('http://localhost:4000/api/v1/products/')
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 this.setState({
                     products: json.products
                 });

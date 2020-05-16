@@ -117,12 +117,11 @@ export default class Product extends Component {
 
         return (
             <div className="col-md-10 admin-body">
-                {/* {!this.state.isAddProduct && <Button variant="primary" onClick={() => this.onCreate()}>Add Product</Button>} */}
+                {!this.state.isAddProduct && <button variant="primary" onClick={() => this.onCreate()}>Add Product</button>}
                 {/* {this.state.response.message === 'Success' && <div><br /><Alert variant="info">{this.state.response.message}</Alert></div>} */}
                 {!this.state.isAddProduct && <ProductList editProduct={this.editProduct} />}
                 {productForm}
                 {this.state.error && <div>Error: {this.state.error.message}</div>}
-
             </div>
         );
     }
