@@ -4,7 +4,8 @@ export default {
         textAlign: "center",
         borderBottom: "1px solid #000",
         lineHeight: "0.1em",
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        margin: '30px 0'
     },
     span: {
         background: "#fff",

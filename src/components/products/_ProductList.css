@@ -1,0 +1,25 @@
+.product-card {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.product-card label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.product-card img {
+    width: 75px;
+    margin: 0 auto;
+}
+
+.actions {
+    text-align: center;
+}
+
+.actions p ion-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}

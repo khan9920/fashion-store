@@ -8,12 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components
 import Navbar from './components/Navbar';
-import ProductList from './components/ProductList';
+import ProductList from './components/products/ProductList';
 import Details from './components/Details';
 import Cart from './components/Cart';
+
+import _Products from './components/products/_Products';
+
 import Default from './components/Default';
-
-
 
 
 class App extends Component {
@@ -26,6 +27,9 @@ class App extends Component {
             <Route exact path="/" component={ProductList}></Route>
             <Route path="/details" component={Details}></Route>
             <Route path="/cart" component={Cart}></Route>
+
+            <Route path="/admin/products" component={_Products}></Route>
+
             <Route component={Default}></Route>
           </Switch>
         </div>

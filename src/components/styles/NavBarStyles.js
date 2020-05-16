@@ -5,7 +5,9 @@ export default {
     },
     brand: {
         fontSize: '30px',
-        fontWeight: '600'
+        fontWeight: '600',
+        textDecoration: "none",
+        color: '#000'
     },
     navListUl: {
         padding: "0",

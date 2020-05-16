@@ -7,7 +7,7 @@ export default class Navbar extends Component {
         return (
             <div className="row" style={StylesNavBar.row}>
                 <div className="col-md-2">
-                    <p style={StylesNavBar.brand}>Life Etc.</p>
+                    <Link to='/' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
                 <div className="col-md-10">
                     <ul style={StylesNavBar.navListUl}>
