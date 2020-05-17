@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import StylesNavBar from './styles/NavBarStyles';
 
 export default class Navbar extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            isLoggedIn: false
+        }
+    }
+
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
@@ -24,8 +32,9 @@ export default class Navbar extends Component {
                             <Link to='/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
                         <li style={StylesNavBar.linkList}>
-                            <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                            LOG IN
+                            <Link to= {this.state.isLoggedIn ? 'contact' : '/login'} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                {this.state.isLoggedIn ? "Sign Out" : "Login"}
+                            </Link>
                         </li>
                         <li style={StylesNavBar.linkList}>
                             <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>

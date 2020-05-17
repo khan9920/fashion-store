@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ProductProvider } from './context';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import Login from "./components/login/login";
+
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 
 ReactDOM.render(
   <ProductProvider>
     <Router>
-      <App />
+      <Route exact path="/login" component={Login}/>
+      <Route exact path="/" component={App}/>
     </Router>
   </ProductProvider>,
   document.getElementById('root')

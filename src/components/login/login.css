@@ -1,0 +1,32 @@
+.card-div {
+    margin: 0 auto;
+    transform: translate(0, 100%)
+}
+
+.btn-wrapper {
+    margin: 0 auto;
+}
+
+.p-card {
+    border-radius: 7px;
+}
+
+.background {
+    height: 100vh;
+    background-image: url("/public/img/background-image.jpg");
+}
+
+.p-card-header {
+    background: #fafafa;
+    text-align: center;
+    border-radius: 7px 7px 0 0 ;
+    padding: 10px;
+}
+
+.text_field {
+    width: 100%;
+}
+
+#submit {
+    width: 100%;
+}
