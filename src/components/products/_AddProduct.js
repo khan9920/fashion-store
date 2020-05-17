@@ -50,22 +50,18 @@ export default class _AddProduct extends Component {
     }
     render() {
         let pageTitle, image;
-        console.log(this.state.file)
         if (this.state._id) {
-            pageTitle = <h2>Edit Product</h2>
+            pageTitle = 'EDIT PRODUCT';
             if (this.state.file) {
                 image = <img className="productImage1" alt='productI' src={this.state.file}></img>
             } else {
-                image = <img className="productImage1" alt='productI' src={'http://localhost:3000/' + this.state.productImage}></img>
+                image = <img className="productImage1" alt='productI' src={'http://localhost:4000/' + this.state.productImage}></img>
             }
         } else {
-            pageTitle = <h2>Add Product</h2>
+            pageTitle = 'ADD PRODUCT';
         }
 
-
-
         if (this.state._id) {
-
             return (
                 <div>
                     {pageTitle}
@@ -75,11 +71,9 @@ export default class _AddProduct extends Component {
                                 {image}
                             </div>
                             <Form.Group controlId="productImage">
-                                {/* <Form.Label>Product Image</Form.Label> */}
                                 <Form.Control
                                     type="file"
                                     name="productImage"
-                                    // value={this.state.productImage}
                                     onChange={this.handleFile}
                                     placeholder="Product Image" />
                             </Form.Group>
@@ -153,73 +147,78 @@ export default class _AddProduct extends Component {
             )
         } else {
             return (
-                <div>
-                    {pageTitle}
-                    <Row>
-                        <Col sm={6}>
-                            <Form onSubmit={this.handleSubmit}>
-                                <Form.Group controlId="name">
-                                    <Form.Label>Product Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
+                <div className="product-form">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <p className="form-title">{pageTitle}</p>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="col-md-12">
+                                    <label>Name</label>
+                                    <input type="text"
                                         name="name"
                                         value={this.state.name}
                                         onChange={this.handleChange}
                                         placeholder="Product Name" />
-                                </Form.Group>
-                                <Form.Group controlId="productImage">
-                                    <Form.Label>Product Image</Form.Label>
-                                    <Form.Control
-                                        type="file"
-                                        name="productImage"
-                                        //value={event.target.files[0]}
-                                        onChange={this.handleFile}
-                                        placeholder="Product Image" />
-                                </Form.Group>
-                                <Form.Group controlId="sku">
-                                    <Form.Label>Category</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="category"
-                                        value={this.state.category}
-                                        onChange={this.handleChange}
-                                        placeholder="category" />
-                                </Form.Group>
-                                <Form.Group controlId="price">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control
-                                        type="text"
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Price</label>
+                                    <input type="text"
                                         name="price"
                                         value={this.state.price}
                                         onChange={this.handleChange}
                                         placeholder="Price" />
-                                </Form.Group>
-                                <Form.Group controlId="quantity">
-                                    <Form.Label>quantity</Form.Label>
-                                    <Form.Control
-                                        type="text"
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Qauntity</label>
+                                    <input type="text"
                                         name="quantity"
                                         value={this.state.quantity}
                                         onChange={this.handleChange}
                                         placeholder="quantity" />
-                                </Form.Group>
-                                <Form.Group controlId="description">
-                                    <Form.Label>description</Form.Label>
-                                    <Form.Control
-                                        type="text"
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Descriptoin</label>
+                                    <input type="text"
                                         name="description"
                                         value={this.state.description}
                                         onChange={this.handleChange}
                                         placeholder="description" />
-                                </Form.Group>
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Category</label>
+                                    <input type="text"
+                                        name="category"
+                                        value={this.state.category}
+                                        onChange={this.handleChange}
+                                        placeholder="category" />
+                                </div>
+                                <div className="col-md-12">
+                                    <p>{this.state.file}</p>
+                                </div>
+                            </div>
 
-                                <Form.Group>
-                                    <Form.Control type="hidden" name="id" value={this.state._id} />
-                                    <Button variant="success" type="submit">Save</Button>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
+                            <div className="col-md-6 image-section">
+                                <div className="image">{
+                                    <img className="productImage1" alt='productI' src={this.state.file}></img>
+                                }
+                                </div>
+                                <div className="col-md-3">
+                                    <label>Image</label>
+                                    <input type="file"
+                                        name="productImage"
+                                        onChange={this.handleFile}
+                                        placeholder="Product Image" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 button-col">
+                                <input type="hidden" name="id" value={this.state._id} />
+                                <button type="submit">SAVE</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             )
         }

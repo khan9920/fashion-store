@@ -82,8 +82,8 @@ export default class _ProductList extends Component {
                                         <div className="col-md-2 actions">
                                             <label>Actions</label>
                                             <p>
-                                                <ion-icon name="create-outline"></ion-icon>
-                                                <ion-icon name="trash-outline"></ion-icon>
+                                                <button onClick={() => this.props.editProduct(product._id)} ><ion-icon name="create-outline"></ion-icon></button>
+                                                <button onClick={() => this.deleteProduct(product._id)} ><ion-icon name="trash-outline"></ion-icon></button>
                                             </p>
                                         </div>
                                         <div className="col-md-9">
@@ -98,55 +98,5 @@ export default class _ProductList extends Component {
                 }
             </React.Fragment>
         )
-        // const { error, products } = this.state;
-
-        // if (error) {
-
-        //     return (
-        //         <div>Error: {error.message}</div>
-        //     )
-        // } else {
-        //     return (
-
-        // <div>
-        //     <table>
-        //         <thead>
-        //             <tr>
-        //                 <th>Product Name</th>
-        //                 <th>Category</th>
-        //                 <th>Price</th>
-        //                 <th>Discount</th>
-        //                 <th>Quantity</th>
-        //                 <th>Discription</th>
-        //                 <th>Image</th>
-        //                 <th>Action</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {products.map(product => (
-        //                 <tr key={product._id}>
-        //                     <td>{product.name}</td>
-        //                     <td>{product.category}</td>
-        //                     <td>{product.price}</td>
-        //                     <td>{product.discount}</td>
-        //                     <td>{product.quantity}</td>
-        //                     <td>{product.description}</td>
-        //                     <td>
-        //                         <card>
-        //                             <img className="productImage" width={50} alt="" src={'http://localhost:4000/' + product.productImage}></img>
-        //                         </card>
-        //                     </td>
-        //                     <td>
-        //                         {/* <Button variant="info" onClick={() => this.props.editProduct(product._id)}>Edit</Button>
-        //   &nbsp;<Button variant="danger" onClick={() => this.deleteProduct(product._id)}>Delete</Button> */}
-        //                     </td>
-        //                 </tr>
-        //             ))}
-        //         </tbody>
-        //     </table>
-
-        // </div>
-        // )
-        // }
     }
 }
