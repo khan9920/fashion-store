@@ -18,12 +18,16 @@ export default class CategoriesList extends Component {
     }
 
     componentDidMount() {
-        this.categoriesService.getCategory()
+        this.categoriesService.getCategories()
             .then((result => {
                 this.setState({
                     categories: result.data.categories
                 })
             }));
+    }
+
+    onEdit(ID) {
+        this.props.history.push(`/store/admin/categories/edit/${ID}`);
     }
 
     onDelete(ID) {
@@ -62,7 +66,7 @@ export default class CategoriesList extends Component {
                                         <td>{category.name}</td>
                                         <td>{category.description}</td>
                                         <td>
-                                            <button ><ion-icon name="create-outline"></ion-icon></button>
+                                            <button onClick={() => this.onEdit(category._id)}><ion-icon name="create-outline"></ion-icon></button>
                                             <button onClick={() => this.onDelete(category._id)}><ion-icon name="trash-outline"></ion-icon></button>
                                         </td>
                                     </tr>

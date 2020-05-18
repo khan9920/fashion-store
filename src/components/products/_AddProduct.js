@@ -50,13 +50,6 @@ export default class _AddProduct extends Component {
         }
     }
 
-    handleCancel(event) {
-        event.preventDefault();
-        if (event) {
-            // this.setState(this);
-        }
-    }
-
     render() {
         let pageTitle, image;
         if (this.state._id) {
