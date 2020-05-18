@@ -8,7 +8,7 @@ export default class Navbar extends Component {
         super();
         this.state = {
             isLoggedIn: false,
-            isUser: true
+            isUser: false
         }
     }
 

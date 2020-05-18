@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 // main css
 import './App.css';
 
@@ -20,6 +20,15 @@ import Default from './components/Default';
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdmin: false
+    }
+  }
+
+
   render() {
     return (
       <React.Fragment>
@@ -30,8 +39,12 @@ class App extends Component {
             <Route path="/store/details" component={Details}/>
             <Route path="/store/cart" component={Cart}/>
 
-            <Route path="/store/admin/products" component={_Products}/>
-            <Route path="/store/admin/products/add" component={_AddProduct}/>
+            <Route exact path="/store/admin/products" component={_Products}>
+              {!this.state.isAdmin && <Redirect to="/store"/>}
+            </Route>
+            <Route path="/store/admin/products/add" component={_AddProduct}>
+              {!this.state.isAdmin && <Redirect to="/store"/>}
+            </Route>
 
             <Route component={Default}/>
           </Switch>
