@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { API } from './../../data/api';
 import { CategoriesService } from '../../services/categoriesService';
 import { Link } from 'react-router-dom';
+import LaftPanel from './../leftpanel/_leftPanel';
 
 export default class CategoriesList extends Component {
 
@@ -28,32 +29,37 @@ export default class CategoriesList extends Component {
 
     render() {
         return (
-            <div className="col-md-10">
-                <Link to="/store/admin/category/add">
-                    <button>ADD CATEGORY</button>
-                </Link>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.categories.map(category => (
-                            <tr key={category._id}>
-                                <td>{category.name}</td>
-                                <td>{category.description}</td>
-                                <td>
-                                    <button ><ion-icon name="create-outline"></ion-icon></button>
-                                    <button ><ion-icon name="trash-outline"></ion-icon></button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <React.Fragment>
+                <div className="row">
+                    <LaftPanel></LaftPanel>
+                    <div className="col-md-10">
+                        <Link to="/store/admin/categories/add">
+                            <button>ADD CATEGORY</button>
+                        </Link>
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.categories.map(category => (
+                                    <tr key={category._id}>
+                                        <td>{category.name}</td>
+                                        <td>{category.description}</td>
+                                        <td>
+                                            <button ><ion-icon name="create-outline"></ion-icon></button>
+                                            <button ><ion-icon name="trash-outline"></ion-icon></button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </React.Fragment>
         )
     }
 }

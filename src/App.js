@@ -13,7 +13,8 @@ import Details from './components/Details';
 import Cart from './components/Cart';
 
 
-import _Categories from './components/categories/_Categories';
+import _Categories from './components/categories/_CategoriesList';
+import _AddCategory from './components/categories/_AddCategory';
 
 import Login from './components/login/login';
 
@@ -42,7 +43,8 @@ class App extends Component {
             <Route path="/store/details" component={Details} />
             <Route path="/store/cart" component={Cart} />
 
-            <Route path="/store/admin/categories" component={_Categories} />
+            <Route exact path="/store/admin/categories" component={_Categories} />
+            <Route exact path="/store/admin/categories/add" component={_AddCategory} />
 
             <Route exact path="/store/admin/products" component={_Products}>
               {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
