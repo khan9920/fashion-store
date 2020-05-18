@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { API } from './../../data/api';
 import { CategoriesService } from '../../services/categoriesService';
 import { Link } from 'react-router-dom';
 import LaftPanel from './../leftpanel/_leftPanel';
@@ -27,6 +26,19 @@ export default class CategoriesList extends Component {
             }));
     }
 
+    onDelete(ID) {
+        if (window.confirm('Are you sure..?')) {
+            this.categoriesService.deleteCategory(ID)
+                .then(result => {
+                    if (result.data.message === 'Category deleted successfully') {
+                        this.setState({
+                            categories: this.state.categories.filter(category => category._id !== ID)
+                        });
+                    };
+                })
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -51,7 +63,7 @@ export default class CategoriesList extends Component {
                                         <td>{category.description}</td>
                                         <td>
                                             <button ><ion-icon name="create-outline"></ion-icon></button>
-                                            <button ><ion-icon name="trash-outline"></ion-icon></button>
+                                            <button onClick={() => this.onDelete(category._id)}><ion-icon name="trash-outline"></ion-icon></button>
                                         </td>
                                     </tr>
                                 ))}

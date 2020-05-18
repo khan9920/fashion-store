@@ -7,6 +7,10 @@ export class CategoriesService {
     }
 
     async addCategory(formData) {
-        return (await axios.post(`${API.URL}category`, formData));
+        return
+    }
+
+    async deleteCategory(ID) {
+        return (await axios.delete(`${API.URL}category/${ID}`));
     }
 }
