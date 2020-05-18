@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API} from '../data/api';
+import { API } from '../data/api';
 
 export class UserService {
   axiosConfig = {
