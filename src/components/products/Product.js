@@ -23,7 +23,6 @@ export default class Product extends Component {
     }
 
     onFormSubmit(data) {
-
         if (this.state.isEditProduct) {
 
             const fd = new FormData();
@@ -59,8 +58,8 @@ export default class Product extends Component {
                     }
                 )
         } else {
-
             const apiUrl = "http://localhost:4000/api/v1/products/";
+
             if (data.name) {
                 const fd = new FormData();
                 fd.append("name", data.name);
@@ -92,7 +91,6 @@ export default class Product extends Component {
                             this.setState({ error });
                         }
                     )
-
             }
         }
 
@@ -124,10 +122,13 @@ export default class Product extends Component {
             productForm = <AddProduct onFormSubmit={this.onFormSubmit} product={this.state.product} />
         }
 
-
         return (
             <div className="col-md-10 admin-body">
-                {!this.state.isAddProduct && <button variant="primary" onClick={() => this.onCreate()}>Add Product</button>}
+                <div className="row">
+                    <div className="col-md-12">
+                        {!this.state.isAddProduct && <button variant="primary" className="add-product-button" onClick={() => this.onCreate()}>ADD PRODUCT</button>}
+                    </div>
+                </div>
                 {/* {this.state.response.message === 'Success' && <div><br /><Alert variant="info">{this.state.response.message}</Alert></div>} */}
                 {!this.state.isAddProduct && <ProductList editProduct={this.editProduct} />}
                 {productForm}

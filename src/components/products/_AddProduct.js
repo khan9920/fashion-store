@@ -50,6 +50,13 @@ export default class _AddProduct extends Component {
         }
     }
 
+    handleCancel(event) {
+        event.preventDefault();
+        if (event) {
+            // this.setState(this);
+        }
+    }
+
     render() {
         let pageTitle, image;
         if (this.state._id) {
@@ -79,19 +86,19 @@ export default class _AddProduct extends Component {
                             <div className="col-md-6">
                                 <div className="col-md-12">
                                     <label>Name</label>
-                                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Product Name" />
+                                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Eg: T-shirt" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Price</label>
-                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Price" />
+                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Eg: 2500" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Qauntity</label>
-                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="quantity" />
+                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="Eg: 90" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Descriptoin</label>
-                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="description" />
+                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Eg: This is a T-shirt" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Category</label>
@@ -99,7 +106,7 @@ export default class _AddProduct extends Component {
                                 </div>
                                 <div className="col-md-12">
                                     <label>Discount</label>
-                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Discount" />
+                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Eg: 25" />
                                 </div>
                             </div>
 
@@ -135,15 +142,15 @@ export default class _AddProduct extends Component {
                                 </div>
                                 <div className="col-md-12">
                                     <label>Price</label>
-                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Price" />
+                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Eg: 2500" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Qauntity</label>
-                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="quantity" />
+                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="Eg: 90" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Descriptoin</label>
-                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="description" />
+                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Eg: This is a T-shirt" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Category</label>
@@ -151,7 +158,7 @@ export default class _AddProduct extends Component {
                                 </div>
                                 <div className="col-md-12">
                                     <label>Discount</label>
-                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Discount" />
+                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Eg: 25" />
                                 </div>
                             </div>
 
@@ -167,6 +174,7 @@ export default class _AddProduct extends Component {
                             <div class="col-md-12 button-col">
                                 <input type="hidden" name="id" value={this.state._id} />
                                 <button type="submit">SAVE</button>
+                                {/* <button type="button">CANCEL</button> */}
                             </div>
                         </div>
                     </form>
@@ -174,5 +182,4 @@ export default class _AddProduct extends Component {
             )
         }
     }
-
 }
