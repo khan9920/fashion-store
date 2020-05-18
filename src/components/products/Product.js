@@ -23,29 +23,35 @@ export default class Product extends Component {
     }
 
     onFormSubmit(data) {
-
+    
         if (this.state.isEditProduct) {
 
             const fd = new FormData();
             fd.append("name", data.name);
-            fd.append("productImage", data.productImage, data.productImage.name);
             fd.append("price", data.price);
             fd.append("category", data.category);
             fd.append("quantity", data.quantity);
             fd.append("description", data.description);
             fd.append("discount", data.discount);
 
+            if(data.file) {
+                fd.append("productImage", data.productImage, data.productImage.name);
+            } else {
+                fd.append("productImage", data.productImage);
+            }
+
             axios.patch(
                 "http://localhost:4000/api/v1/products/" + data._id,
                 fd,
             )
                 .then(result => {
-                    console.log(result.data.message);
-                    console.log(result.data.updatedProduct);
+                
                     this.setState({
                         response: result,
+                        product: null,
+                        isEditProduct: false,
                         isAddProduct: false,
-                        isEditProduct: false
+                       
                     })
                 },
                     (error) => {
@@ -55,6 +61,7 @@ export default class Product extends Component {
         } else {
 
             const apiUrl = "http://localhost:4000/api/v1/products/";
+            if(data.name){
 
             const fd = new FormData();
             fd.append("name", data.name);
@@ -83,6 +90,8 @@ export default class Product extends Component {
                         this.setState({ error });
                     }
                 )
+
+        }
         }
 
     }
@@ -94,7 +103,6 @@ export default class Product extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result.product);
                     this.setState({
 
                         product: result.product,

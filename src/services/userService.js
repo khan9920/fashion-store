@@ -11,6 +11,6 @@ export class UserService {
   };
 
   async userLogin(data) {
-    return (await axios.post(API.URL + 'users/login', data,{headers: this.axiosConfig.headers}));
+    return (await axios.post(API.URL + 'users/login', data));
   }
 }

@@ -44,8 +44,11 @@ export default class _AddProduct extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.onFormSubmit(this.state);
-        this.setState(this.initialState);
+        if(event){
+            this.props.onFormSubmit(this.state);
+            this.setState(this.initialState);
+        }
+       
 
     }
     render() {
@@ -56,9 +59,14 @@ export default class _AddProduct extends Component {
                 image = <img className="productImage1" alt='productI' src={this.state.file}></img>
             } else {
                 image = <img className="productImage1" alt='productI' src={'http://localhost:4000/' + this.state.productImage}></img>
-            }
+            } 
         } else {
             pageTitle = 'ADD PRODUCT';
+            if (this.state.file) {
+                image = <img className="productImage1" alt='productI' src={this.state.file}></img>
+            } else {
+                image = <p>No Image Selected</p>
+            } 
         }
 
         if (this.state._id) {
@@ -70,6 +78,8 @@ export default class _AddProduct extends Component {
                             <div className="image">
                                 {image}
                             </div>
+                            
+                            <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="productImage">
                                 <Form.Control
                                     type="file"
@@ -77,7 +87,6 @@ export default class _AddProduct extends Component {
                                     onChange={this.handleFile}
                                     placeholder="Product Image" />
                             </Form.Group>
-                            <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="name">
                                     <Form.Label>Product Name</Form.Label>
                                     <Form.Control
@@ -194,18 +203,13 @@ export default class _AddProduct extends Component {
                                         onChange={this.handleChange}
                                         placeholder="category" />
                                 </div>
-                                <div className="col-md-12">
-                                    <p>{this.state.file}</p>
-                                </div>
                             </div>
 
                             <div className="col-md-6 image-section">
-                                <div className="image">{
-                                    <img className="productImage1" alt='productI' src={this.state.file}></img>
-                                }
-                                </div>
-                                <div className="col-md-3">
-                                    <label>Image</label>
+                            <label>Image</label>
+                                {image}
+                                <div className="col-md-6">
+                                   
                                     <input type="file"
                                         name="productImage"
                                         onChange={this.handleFile}

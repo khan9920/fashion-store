@@ -40,10 +40,10 @@ class App extends Component {
             <Route path="/store/cart" component={Cart}/>
 
             <Route exact path="/store/admin/products" component={_Products}>
-              {!this.state.isAdmin && <Redirect to="/store"/>}
+              {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
             </Route>
             <Route path="/store/admin/products/add" component={_AddProduct}>
-              {!this.state.isAdmin && <Redirect to="/store"/>}
+              {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
             </Route>
 
             <Route component={Default}/>
