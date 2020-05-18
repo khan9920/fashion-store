@@ -44,13 +44,12 @@ export default class _AddProduct extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        if(event){
+        if (event) {
             this.props.onFormSubmit(this.state);
             this.setState(this.initialState);
         }
-       
-
     }
+
     render() {
         let pageTitle, image;
         if (this.state._id) {
@@ -59,99 +58,66 @@ export default class _AddProduct extends Component {
                 image = <img className="productImage1" alt='productI' src={this.state.file}></img>
             } else {
                 image = <img className="productImage1" alt='productI' src={'http://localhost:4000/' + this.state.productImage}></img>
-            } 
+            }
         } else {
             pageTitle = 'ADD PRODUCT';
             if (this.state.file) {
                 image = <img className="productImage1" alt='productI' src={this.state.file}></img>
             } else {
                 image = <p>No Image Selected</p>
-            } 
+            }
         }
 
         if (this.state._id) {
             return (
-                <div>
-                    {pageTitle}
-                    <Row>
-                        <Col sm={12}>
-                            <div className="image">
-                                {image}
+                <div className="product-form">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <p className="form-title">{pageTitle}</p>
                             </div>
-                            
-                            <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="productImage">
-                                <Form.Control
-                                    type="file"
-                                    name="productImage"
-                                    onChange={this.handleFile}
-                                    placeholder="Product Image" />
-                            </Form.Group>
-                                <Form.Group controlId="name">
-                                    <Form.Label>Product Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="name"
-                                        value={this.state.name}
-                                        onChange={this.handleChange}
-                                        placeholder="Product Name" />
-                                </Form.Group>
+                            <div className="col-md-6">
+                                <div className="col-md-12">
+                                    <label>Name</label>
+                                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Product Name" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Price</label>
+                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Price" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Qauntity</label>
+                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="quantity" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Descriptoin</label>
+                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="description" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Category</label>
+                                    <input type="text" name="category" value={this.state.category} onChange={this.handleChange} placeholder="category" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Discount</label>
+                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Discount" />
+                                </div>
+                            </div>
 
-                                <Form.Group controlId="Category">
-                                    <Form.Label>Category</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="category"
-                                        value={this.state.category}
-                                        onChange={this.handleChange}
-                                        placeholder="category" />
-                                </Form.Group>
-                                <Form.Group controlId="price">
-                                    <Form.Label>Price</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="price"
-                                        value={this.state.price}
-                                        onChange={this.handleChange}
-                                        placeholder="Price" />
-                                </Form.Group>
-                                <Form.Group controlId="quantity">
-                                    <Form.Label>quantity</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="quantity"
-                                        value={this.state.quantity}
-                                        onChange={this.handleChange}
-                                        placeholder="quantity" />
-                                </Form.Group>
-                                <Form.Group controlId="description">
-                                    <Form.Label>description</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="description"
-                                        value={this.state.description}
-                                        onChange={this.handleChange}
-                                        placeholder="description" />
-                                </Form.Group>
+                            <div className="col-md-6 image-section">
+                                <label>Product Image</label>
+                                {image}
+                                <label class="custom-file-upload">
+                                    <input type="file" className="button-input" name="productImage" onChange={this.handleFile} placeholder="Product Image" />
+                                    Upload Image
+                                    </label>
+                            </div>
 
-                                <Form.Group controlId="Add discount">
-                                    <Form.Label>Add discount</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="discount"
-                                        value={this.state.discount}
-                                        onChange={this.handleChange}
-                                        placeholder="discount" />
-                                </Form.Group>
-
-
-                                <Form.Group>
-                                    <Form.Control type="hidden" name="id" value={this.state._id} />
-                                    <Button variant="success" type="submit">Save</Button>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
+                            <div class="col-md-12 button-col">
+                                <input type="hidden" name="id" value={this.state._id} />
+                                <button type="submit">SAVE</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             )
         } else {
@@ -165,56 +131,37 @@ export default class _AddProduct extends Component {
                             <div className="col-md-6">
                                 <div className="col-md-12">
                                     <label>Name</label>
-                                    <input type="text"
-                                        name="name"
-                                        value={this.state.name}
-                                        onChange={this.handleChange}
-                                        placeholder="Product Name" />
+                                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Product Name" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Price</label>
-                                    <input type="text"
-                                        name="price"
-                                        value={this.state.price}
-                                        onChange={this.handleChange}
-                                        placeholder="Price" />
+                                    <input type="text" name="price" value={this.state.price} onChange={this.handleChange} placeholder="Price" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Qauntity</label>
-                                    <input type="text"
-                                        name="quantity"
-                                        value={this.state.quantity}
-                                        onChange={this.handleChange}
-                                        placeholder="quantity" />
+                                    <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleChange} placeholder="quantity" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Descriptoin</label>
-                                    <input type="text"
-                                        name="description"
-                                        value={this.state.description}
-                                        onChange={this.handleChange}
-                                        placeholder="description" />
+                                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="description" />
                                 </div>
                                 <div className="col-md-12">
                                     <label>Category</label>
-                                    <input type="text"
-                                        name="category"
-                                        value={this.state.category}
-                                        onChange={this.handleChange}
-                                        placeholder="category" />
+                                    <input type="text" name="category" value={this.state.category} onChange={this.handleChange} placeholder="category" />
+                                </div>
+                                <div className="col-md-12">
+                                    <label>Discount</label>
+                                    <input type="text" name="discount" value={this.state.discount} onChange={this.handleChange} placeholder="Discount" />
                                 </div>
                             </div>
 
                             <div className="col-md-6 image-section">
-                            <label>Image</label>
+                                <label>Product Image</label>
                                 {image}
-                                <div className="col-md-6">
-                                   
-                                    <input type="file"
-                                        name="productImage"
-                                        onChange={this.handleFile}
-                                        placeholder="Product Image" />
-                                </div>
+                                <label class="custom-file-upload">
+                                    <input type="file" className="button-input" name="productImage" onChange={this.handleFile} placeholder="Product Image" />
+                                    Upload Image
+                                    </label>
                             </div>
 
                             <div class="col-md-12 button-col">

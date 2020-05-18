@@ -23,7 +23,7 @@ export default class Product extends Component {
     }
 
     onFormSubmit(data) {
-    
+
         if (this.state.isEditProduct) {
 
             const fd = new FormData();
@@ -34,7 +34,7 @@ export default class Product extends Component {
             fd.append("description", data.description);
             fd.append("discount", data.discount);
 
-            if(data.file) {
+            if (data.file) {
                 fd.append("productImage", data.productImage, data.productImage.name);
             } else {
                 fd.append("productImage", data.productImage);
@@ -45,13 +45,13 @@ export default class Product extends Component {
                 fd,
             )
                 .then(result => {
-                
+
                     this.setState({
                         response: result,
                         product: null,
                         isEditProduct: false,
                         isAddProduct: false,
-                       
+
                     })
                 },
                     (error) => {
@@ -61,37 +61,39 @@ export default class Product extends Component {
         } else {
 
             const apiUrl = "http://localhost:4000/api/v1/products/";
-            if(data.name){
+            if (data.name) {
+                const fd = new FormData();
+                fd.append("name", data.name);
+                fd.append("productImage", data.productImage, data.productImage.name);
+                fd.append("price", data.price);
+                fd.append("category", data.category);
+                fd.append("quantity", data.quantity);
+                fd.append("description", data.description);
+                fd.append("discount", data.discount);
 
-            const fd = new FormData();
-            fd.append("name", data.name);
-            fd.append("productImage", data.productImage, data.productImage.name);
-            fd.append("price", data.price);
-            fd.append("category", data.category);
-            fd.append("quantity", data.quantity);
-            fd.append("description", data.description);
-            const options = {
-                method: 'POST',
-                body: fd
+                console.log(data.description);
 
-            };
+                const options = {
+                    method: 'POST',
+                    body: fd
+                };
 
-            fetch(apiUrl, options)
-                .then(res => res.json())
-                .then(result => {
-                    console.log("result" + result);
-                    this.setState({
-                        response: result,
-                        isAddProduct: false,
-                        isEditProduct: false
-                    })
-                },
-                    (error) => {
-                        this.setState({ error });
-                    }
-                )
+                fetch(apiUrl, options)
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log("result" + result);
+                        this.setState({
+                            response: result,
+                            isAddProduct: false,
+                            isEditProduct: false
+                        })
+                    },
+                        (error) => {
+                            this.setState({ error });
+                        }
+                    )
 
-        }
+            }
         }
 
     }
