@@ -11,6 +11,10 @@ import Navbar from './components/Navbar';
 import ProductList from './components/products/ProductList';
 import Details from './components/Details';
 import Cart from './components/Cart';
+
+
+import _Categories from './components/categories/_Categories';
+
 import Login from './components/login/login';
 
 import _Products from './components/products/_Products';
@@ -28,16 +32,17 @@ class App extends Component {
     }
   }
 
-
   render() {
     return (
       <React.Fragment>
         <div className="container">
-          <Navbar/>
+          <Navbar />
           <Switch >
-            <Route exact path="/store" component={ProductList}/>
-            <Route path="/store/details" component={Details}/>
-            <Route path="/store/cart" component={Cart}/>
+            <Route exact path="/store" component={ProductList} />
+            <Route path="/store/details" component={Details} />
+            <Route path="/store/cart" component={Cart} />
+
+            <Route path="/store/admin/categories" component={_Categories} />
 
             <Route exact path="/store/admin/products" component={_Products}>
               {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
@@ -46,7 +51,7 @@ class App extends Component {
               {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
             </Route>
 
-            <Route component={Default}/>
+            <Route component={Default} />
           </Switch>
         </div>
       </React.Fragment>
