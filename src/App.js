@@ -26,12 +26,12 @@ class App extends Component {
         <div className="container">
           <Navbar/>
           <Switch >
-            <Route exact path="/" component={ProductList}/>
-            <Route path="/details" component={Details}/>
-            <Route path="/cart" component={Cart}/>
+            <Route exact path="/store" component={ProductList}/>
+            <Route path="/store/details" component={Details}/>
+            <Route path="/store/cart" component={Cart}/>
 
-            <Route path="/admin/products" component={_Products}/>
-            <Route path="/admin/products/add" component={_AddProduct}/>
+            <Route path="/store/admin/products" component={_Products}/>
+            <Route path="/store/admin/products/add" component={_AddProduct}/>
 
             <Route component={Default}/>
           </Switch>

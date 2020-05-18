@@ -5,17 +5,20 @@ import './login.css';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {UserService} from "../../services/userService";
+import {Growl} from 'primereact/growl';
 
 class MyComponent extends Component {
   // Services
   userService;
+  growl;
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.userService = new UserService();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     }
   }
 
@@ -30,10 +33,33 @@ class MyComponent extends Component {
 
   login = (event) => {
     event.preventDefault();
-    this.userService.userLogin(this.state).then(data => {
-      console.log(data);
+    this.setState({
+      isLoading: true
+    });
+    // get User details
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    // api call to login
+    this.userService.userLogin(user).then(data => {
+      this.setState({
+        isLoading: false
+      });
+      if (data.data) {
+        if (data.data.status) {
+          this.growl.show({severity: 'success', summary: 'Welcome'});
+          localStorage.setItem('token', data.data.token);
+          this.props.history.push('/store')
+        } else {
+          this.growl.show({severity: 'error', summary: 'Login Failed', detail: data.data.msg});
+        }
+      }
     }).catch(error => {
-      console.log(error);
+      this.setState({
+        isLoading: false
+      });
+      this.growl.show({severity: 'error', summary: 'Login Failed', detail: 'Please try again'});
     })
   }
 
@@ -48,13 +74,9 @@ class MyComponent extends Component {
     };
 
     const header = <h2>Login</h2>;
-    const footer = <div className="row mt-3">
-      <div className="col-6 btn-wrapper">
-        <Button id="submit" type="submit" onSubmit={this.login} label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>;
-      </div>
-    </div>
     return (
       <div style={sectionStyle} className="background">
+        <Growl ref={(el) => this.growl = el}/>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -99,7 +121,8 @@ class MyComponent extends Component {
 
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
-                        <Button disabled={this.buttonValidation()} id="submit" type="submit" label="Save" icon="pi pi-check" style={{marginRight: '.25em'}}/>;
+                        <Button disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
+                                icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
                       </div>
                     </div>
                   </form>
