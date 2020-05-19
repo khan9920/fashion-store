@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { ProductsService } from '../../services/productsService';
+import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 
 export default class _AddProduct extends Component {
 
     productsService;
+    categoriesService;
 
     constructor(props) {
         super(props);
         this.productsService = new ProductsService();
+        this.categoriesService = new CategoriesService();
         this.state = {
             _id: '',
             name: '',
@@ -19,11 +22,23 @@ export default class _AddProduct extends Component {
             description: '',
             discount: '',
             file: null,
+            categories: []
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.categoriesService.getCategories()
+            .then(results => {
+                this.setState({
+                    categories: results.data.categories
+                })
+                // this.state.
+                console.log(this.state.categories);
+            });
     }
 
     handleChange(event) {
@@ -58,7 +73,7 @@ export default class _AddProduct extends Component {
                 if (result.data.message === 'Success') {
                     this.props.history.push('/store/admin/products');
                 };
-            })
+            });
         }
     }
 
@@ -101,7 +116,14 @@ export default class _AddProduct extends Component {
                                         </div>
                                         <div className="col-md-12">
                                             <label>Category</label>
-                                            <input type="text" name="category" value={this.state.category} onChange={this.handleChange} placeholder="category" />
+                                            <select name="category" onChange={this.handleChange}>
+                                                {
+                                                    this.state.categories.map(category => (
+                                                        <option key={category._id} value={category.name}>{category.name}</option>
+                                                    ))
+                                                }
+                                                }
+                                            </select>
                                         </div>
                                         <div className="col-md-12">
                                             <label>Discount</label>
@@ -128,7 +150,7 @@ export default class _AddProduct extends Component {
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

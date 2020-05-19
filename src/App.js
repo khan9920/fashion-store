@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // main css
 import './App.css';
@@ -23,10 +23,9 @@ import _Categories from './components/categories/_CategoriesList';
 import _AddCategory from './components/categories/_AddCategory';
 import _EditCategory from './components/categories/_EditCategory';
 
-import Login from './components/login/login';
+// import Login from './components/login/login';
 
 import Default from './components/Default';
-
 
 class App extends Component {
 

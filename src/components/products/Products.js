@@ -16,10 +16,21 @@ export default class Products extends Component {
     componentDidMount() {
         this.productsService.getProducts()
             .then(result => {
+                let products = [];
+                result.data.products.map(product => {
+                    if (product.discount === 0) {
+                        products.push(product);
+                    }
+
+                    product.originalPrice = product.price;
+                    product.price = product.price - (product.price * (product.discount / 100));
+
+                    products.push(product);
+                })
                 this.setState({
-                    products: result.data.products
+                    products
                 });
-            });
+            })
     }
 
     render() {
