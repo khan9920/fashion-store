@@ -1,27 +1,23 @@
-import React, { Component } from 'react'
-import './../styles/ProductList.css'
-import Title from '../Title';
+import React, { Component } from 'react';
+import { ProductsService } from '../../services/productsService';
 
-export default class ProductList extends Component {
-    // state = {
-    //     products: []
-    // }
+export default class Products extends Component {
+
+    productsService;
 
     constructor(props) {
         super(props);
+        this.productsService = new ProductsService();
         this.state = {
-            errror: null,
-            products: [],
-            response: {}
+            products: []
         }
     }
 
     componentDidMount() {
-        fetch('http://localhost:4000/api/v1/products')
-            .then(res => res.json())
-            .then(json => {
+        this.productsService.getProducts()
+            .then(result => {
                 this.setState({
-                    products: json.products
+                    products: result.data.products
                 });
             });
     }
@@ -29,7 +25,6 @@ export default class ProductList extends Component {
     render() {
         return (
             <React.Fragment>
-                <Title title="featured items" />
                 <div className="row">
                     {
                         this.state.products.map(product => (
