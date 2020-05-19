@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import {Card} from 'primereact/card';
-import './login.css';
-import {Button} from 'primereact/button';
-import {InputText} from 'primereact/inputtext';
 import {UserService} from "../../services/userService";
-import {Link, Redirect} from 'react-router-dom';
 import {JwtService} from "../../services/jwtService";
-import {Growl} from 'primereact/growl';
+import {Growl} from "primereact/growl";
+import {Card} from "primereact/card";
+import {InputText} from "primereact/inputtext";
+import {Link, Redirect} from "react-router-dom";
+import {Button} from "primereact/button";
+import './register.css';
 
-
-class MyComponent extends Component {
+class Register extends Component {
   // Services
   userService;
   growl;
@@ -22,14 +21,15 @@ class MyComponent extends Component {
     this.state = {
       email: '',
       password: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
       isLoading: false,
       isLoggedIn: this.jwtService.validateToken()
     }
-    console.log(this.state.isLoggedIn);
   }
 
   formUpdate = (event) => {
-    console.log(event.target.name);
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
@@ -37,7 +37,7 @@ class MyComponent extends Component {
     })
   };
 
-  login = (event) => {
+  signUp = (event) => {
     event.preventDefault();
     this.setState({
       isLoading: true,
@@ -75,7 +75,7 @@ class MyComponent extends Component {
   }
 
   buttonValidation() {
-    return this.state.email === '' || this.state.password.length < 8;
+    return this.state.email === '' || this.state.password.length < 8 || this.state.first_name === '' || this.state.last_name === '';
   }
 
   render() {
@@ -84,7 +84,7 @@ class MyComponent extends Component {
       backgroundSize: 'cover'
     };
 
-    const header = <h2>Login</h2>;
+    const header = <h2>Register</h2>;
     return (
       <div style={sectionStyle} className="background">
         <Growl ref={(el) => this.growl = el} />
@@ -94,58 +94,85 @@ class MyComponent extends Component {
               <div className="col-md-6 card-div">
                 <Card header={header}>
                   <div className="text-center">
-                    <p>Remember to keep credentials safe</p>
+                    <p>Welcome to the fashion store</p>
                   </div>
-                  <form onSubmit={this.login}>
+                  <form onSubmit={this.signUp}>
 
                     <div className="row mt-4">
-                      <div className="col-2">
+                      <div className="col-3">
                         <p>Email</p>
                       </div>
-                      <div className="col-10">
+                      <div className="col-9">
                         <span className="p-float-label">
                           <InputText className="text_field"
-                            type="email"
-                            id="email"
-                            value={this.state.email}
-                            name="email"
-                            onChange={this.formUpdate} />
+                                     type="email"
+                                     id="email"
+                                     value={this.state.email}
+                                     name="email"
+                                     onChange={this.formUpdate} />
                           <label htmlFor="in">Email</label>
                         </span>
                       </div>
                     </div>
 
                     <div className="row mt-4">
-                      <div className="col-2">
+                      <div className="col-3">
                         <p>password</p>
                       </div>
-                      <div className="col-10">
+                      <div className="col-9">
                         <span className="p-float-label">
                           <InputText type="password" className="text_field" id="password"
-                            value={this.state.password}
-                            name="password"
-                            onChange={this.formUpdate} />
+                                     value={this.state.password}
+                                     name="password"
+                                     onChange={this.formUpdate} />
                           <label htmlFor="in">password</label>
                         </span>
                       </div>
                     </div>
-                    <div className="row mt-4">
-                      <div className="col-md-2">
-                        <Link className="link" to='/register'>
-                          Register
-                        </Link>
-                      </div>
-                      <div className="col-md-4">
-                        <Link className="link" to='/'>
-                          Forgot Password
-                        </Link>
-                      </div>
 
+                    <div className="row mt-4">
+                      <div className="col-3">
+                        <p>First Name</p>
+                      </div>
+                      <div className="col-9">
+                        <span className="p-float-label">
+                          <InputText className="text_field"
+                                     type="text"
+                                     id="first_name"
+                                     value={this.state.first_name}
+                                     name="first_name"
+                                     onChange={this.formUpdate} />
+                          <label htmlFor="in">First Name</label>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="row mt-4">
+                      <div className="col-3">
+                        <p>Last Name</p>
+                      </div>
+                      <div className="col-9">
+                        <span className="p-float-label">
+                          <InputText className="text_field"
+                                     id="last_name"
+                                     value={this.state.last_name}
+                                     name="last_name"
+                                     onChange={this.formUpdate} />
+                          <label htmlFor="in">Last Name</label>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="row mt-4">
+                      <div className="col-12">
+                        Already Have an Account? <Link className="link" to='/login'>
+                          Login
+                        </Link>
+                      </div>
                     </div>
 
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
-                        <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
+                        <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Sign Up"
                                 icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
                       </div>
                     </div>
@@ -163,6 +190,4 @@ class MyComponent extends Component {
   }
 }
 
-MyComponent.propTypes = {};
-
-export default MyComponent;
+export default Register;
