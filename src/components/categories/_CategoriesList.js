@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CategoriesService } from '../../services/categoriesService';
 import { Link } from 'react-router-dom';
-import LaftPanel from './../leftpanel/_leftPanel';
+import LeftPanel from './../leftpanel/_leftPanel';
 
 export default class CategoriesList extends Component {
 
@@ -47,7 +47,7 @@ export default class CategoriesList extends Component {
         return (
             <React.Fragment>
                 <div className="row">
-                    <LaftPanel></LaftPanel>
+                    <LeftPanel></LeftPanel>
                     <div className="col-md-10">
                         <Link to="/store/admin/categories/add">
                             <button>ADD CATEGORY</button>

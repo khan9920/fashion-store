@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CategoriesService } from './../../services/categoriesService';
-import LaftPanel from './../leftpanel/_leftPanel';
+import LeftPanel from './../leftpanel/_leftPanel';
 
 
 export default class _AddCategory extends Component {
@@ -45,7 +45,7 @@ export default class _AddCategory extends Component {
         return (
             <React.Fragment>
                 <div className="row">
-                    <LaftPanel></LaftPanel>
+                    <LeftPanel></LeftPanel>
                     <div className="col-md-10">
                         <div className="category-form">
                             <form onSubmit={this.handleSubmit}>
