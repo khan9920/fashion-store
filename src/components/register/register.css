@@ -1,6 +1,6 @@
 .card-div {
     margin: 0 auto;
-    transform: translate(0, 80%)
+    transform: translate(0, 50%)
 }
 
 .btn-wrapper {
@@ -37,7 +37,7 @@
 }
 
 .link {
-    text-decoration: none;
+    text-decoration: underline;
     color: black;
 }
 
