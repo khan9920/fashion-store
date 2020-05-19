@@ -30,6 +30,7 @@ export default class Products extends Component {
                 this.setState({
                     products
                 });
+            })
     }
 
     render() {
