@@ -6,6 +6,7 @@ import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext";
 import {Link, Redirect} from "react-router-dom";
 import {Button} from "primereact/button";
+import {Password} from 'primereact/password';
 import './register.css';
 
 class Register extends Component {
@@ -121,10 +122,11 @@ class Register extends Component {
                       </div>
                       <div className="col-9">
                         <span className="p-float-label">
-                          <InputText type="password" className="text_field" id="password"
-                                     value={this.state.password}
-                                     name="password"
-                                     onChange={this.formUpdate} />
+                          <Password className="text_field" name="password" value={this.state.password} onChange={this.formUpdate} />
+                          {/*<InputText type="password" className="text_field" id="password"*/}
+                          {/*           value={this.state.password}*/}
+                          {/*           name="password"*/}
+                          {/*           onChange={this.formUpdate} />*/}
                           <label htmlFor="in">password</label>
                         </span>
                       </div>
