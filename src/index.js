@@ -5,12 +5,21 @@ import App from './App';
 import { ProductProvider } from './context';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import {JwtService} from "./services/jwtService";
 import Login from "./components/login/login";
 
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
+function getLogin() {
+  const jwtService = new JwtService();
+  if (jwtService.validateToken()) {
+    return <Redirect to = '/store'/>
+  } else {
+    return <Login/>
+  }
+}
 
 ReactDOM.render(
   <ProductProvider>
@@ -18,7 +27,9 @@ ReactDOM.render(
       <Route exact path="/">
         <Redirect to='/store'/>
       </Route>
-      <Route exact path="/login" component={Login}/>
+      <Route exact path="/login">
+        {getLogin()}
+      </Route>
       <Route path="/store" component={App}/>
     </Router>
   </ProductProvider>,

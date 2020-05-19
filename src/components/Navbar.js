@@ -1,20 +1,38 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import StylesNavBar from './styles/NavBarStyles';
+import {JwtService} from "../services/jwtService";
+import {Redirect} from "react-router-dom";
+import './navbar.css';
 
 export default class Navbar extends Component {
+    // Services
+    jwtService;
 
     constructor() {
         super();
+        this.jwtService = new JwtService();
+        const token = this.jwtService.validateToken();
         this.state = {
-            isLoggedIn: false,
-            isUser: false
+            isLoggedIn: token,
+            role: token ? token.role : null,
+            redirect: false
         }
     }
+
+    signOut = () => {
+        this.jwtService.deleteToken();
+        this.setState({
+            isLoggedIn: false,
+            role: null,
+            redirect: true
+        });
+    };
 
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
+                {this.state.redirect && <Redirect to="/"/>}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
@@ -30,11 +48,15 @@ export default class Navbar extends Component {
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
                         <li style={StylesNavBar.linkList}>
-                            <Link to={this.state.isLoggedIn ? 'contact' : '/login'} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                                {this.state.isLoggedIn ? "Sign Out" : "Login"}
-                            </Link>
+                            { this.state.isLoggedIn ?
+                              <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                  Sign Out
+                            </a> :
+                              <Link to="/login" style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                  Login
+                              </Link>}
                         </li>
-                        {this.state.isUser &&
+                        {(this.state.role === 'User') &&
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                             CART

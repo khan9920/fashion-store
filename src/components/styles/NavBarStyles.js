@@ -27,6 +27,6 @@ export default {
         marginRight: "5px"
     },
     linktListA: {
-        color: '#000'
+        color: '#000',
     }
 }

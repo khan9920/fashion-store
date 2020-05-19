@@ -1,25 +1,30 @@
 import React, {Component} from 'react';
 import {Card} from 'primereact/card';
-import PropTypes from 'prop-types';
 import './login.css';
 import {Button} from 'primereact/button';
 import {InputText} from 'primereact/inputtext';
 import {UserService} from "../../services/userService";
+import {Link, Redirect} from 'react-router-dom';
+import {JwtService} from "../../services/jwtService";
 import {Growl} from 'primereact/growl';
 
 class MyComponent extends Component {
   // Services
   userService;
   growl;
+  jwtService;
 
   constructor(props) {
     super(props);
     this.userService = new UserService();
+    this.jwtService = new JwtService();
     this.state = {
       email: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      isLoggedIn: this.jwtService.validateToken()
     }
+    console.log(this.state.isLoggedIn);
   }
 
   formUpdate = (event) => {
@@ -34,7 +39,8 @@ class MyComponent extends Component {
   login = (event) => {
     event.preventDefault();
     this.setState({
-      isLoading: true
+      isLoading: true,
+      isLoggedIn: false
     });
     // get User details
     const user = {
@@ -50,7 +56,11 @@ class MyComponent extends Component {
         if (data.data.status) {
           this.growl.show({severity: 'success', summary: 'Welcome'});
           localStorage.setItem('token', data.data.token);
-          this.props.history.push('/store')
+          this.setState({
+            isLoggedIn: true
+          });
+          return;
+          // this.props.history.push('/store')
         } else {
           this.growl.show({severity: 'error', summary: 'Login Failed', detail: data.data.msg});
         }
@@ -118,10 +128,23 @@ class MyComponent extends Component {
                   </span>
                       </div>
                     </div>
+                    <div className="row mt-4">
+                      <div className="col-md-2">
+                        <Link className="link" to='/'>
+                          Register
+                        </Link>
+                      </div>
+                      <div className="col-md-4">
+                        <Link className="link" to='/'>
+                          Forgot Password
+                        </Link>
+                      </div>
+
+                    </div>
 
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
-                        <Button disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
+                        <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
                                 icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
                       </div>
                     </div>
@@ -132,6 +155,8 @@ class MyComponent extends Component {
             </div>
           </div>
         </div>
+        { this.state.isLoggedIn && <Redirect to="/"/> }
+
       </div>
     );
   }

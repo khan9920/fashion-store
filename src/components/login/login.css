@@ -1,6 +1,6 @@
 .card-div {
     margin: 0 auto;
-    transform: translate(0, 100%)
+    transform: translate(0, 80%)
 }
 
 .btn-wrapper {
@@ -29,4 +29,18 @@
 
 #submit {
     width: 100%;
+}
+
+.p-button {
+    background: black !important;
+    border-radius: 8px !important;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover{
+    color: black;
 }
