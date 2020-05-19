@@ -16,6 +16,7 @@ import Cart from './components/Cart';
 import Products from './components/products/Products';
 import _ProductsList from './components/products/_ProductsList';
 import _AddProduct from './components/products/_AddProduct';
+import _EditProduct from './components/products/_EditProduct';
 
 // categories
 import _Categories from './components/categories/_CategoriesList';
@@ -50,12 +51,14 @@ class App extends Component {
             <Route exact path="/store/admin/categories/add" component={_AddCategory} />
             <Route exact path="/store/admin/categories/edit/:id" component={_EditCategory} />
 
-            <Route exact path="/store/admin/products" component={_ProductsList}>
-              {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
-            </Route>
-            <Route path="/store/admin/products/add" component={_AddProduct}>
-              {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
-            </Route>
+            <Route exact path="/store/admin/products" component={_ProductsList} />
+            <Route path="/store/admin/products/add" component={_AddProduct} />
+            <Route path="/store/admin/products/edit/:id" component={_EditProduct} />
+
+            {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
+
+            {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
+
 
             <Route component={Default} />
           </Switch>

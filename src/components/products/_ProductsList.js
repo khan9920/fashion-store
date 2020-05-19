@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
 import LeftPanel from './../leftpanel/_leftPanel';
+import { Link } from 'react-router-dom';
 
 export default class _ProductsList extends Component {
     productsService;
@@ -22,6 +23,23 @@ export default class _ProductsList extends Component {
             })
     }
 
+    onEdit(ID) {
+        this.props.history.push(`/store/admin/products/edit/${ID}`);
+    }
+
+    onDelete(ID) {
+        if (window.confirm('Are you sure..?')) {
+            this.productsService.deleteProduct(ID)
+                .then(result => {
+                    if (result.data.message === 'Success') {
+                        console.log('This worked');
+                        this.setState({
+                            products: this.state.products.filter(product => product._id !== ID)
+                        });
+                    };
+                });
+        }
+    }
 
     render() {
         return (
@@ -29,6 +47,9 @@ export default class _ProductsList extends Component {
                 <div className="row">
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
+                        <Link to="/store/admin/products/add">
+                            <button>ADD PRODUCTS</button>
+                        </Link>
                         {
                             this.state.products.map(product => (
                                 <div className="product-card" key={product._id}>
@@ -61,8 +82,8 @@ export default class _ProductsList extends Component {
                                                 <div className="col-md-2 actions">
                                                     <label>Actions</label>
                                                     <p>
-                                                        <button onClick={() => this.props.editProduct(product._id)} ><ion-icon name="create-outline"></ion-icon></button>
-                                                        <button onClick={() => this.deleteProduct(product._id)} ><ion-icon name="trash-outline"></ion-icon></button>
+                                                        <button onClick={() => this.onEdit(product._id)} ><ion-icon name="create-outline"></ion-icon></button>
+                                                        <button onClick={() => this.onDelete(product._id)} ><ion-icon name="trash-outline"></ion-icon></button>
                                                     </p>
                                                 </div>
                                                 <div className="col-md-9">
