@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ProductProvider } from './context';
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import Login from "./components/login/login";
 
@@ -16,10 +16,10 @@ ReactDOM.render(
   <ProductProvider>
     <Router>
       <Route exact path="/">
-        <Redirect to='/store'/>
+        <Redirect to='/store' />
       </Route>
-      <Route exact path="/login" component={Login}/>
-      <Route path="/store" component={App}/>
+      <Route exact path="/login" component={Login} />
+      <Route path="/store" component={App} />
     </Router>
   </ProductProvider>,
   document.getElementById('root')
