@@ -16,9 +16,7 @@ export default class Products extends Component {
     componentDidMount() {
         this.productsService.getProducts()
             .then(result => {
-                this.setState({
-                    products: result.data.products
-                });
+                // add code
             });
     }
 
