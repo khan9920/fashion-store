@@ -26,6 +26,7 @@ import _EditCategory from './components/categories/_EditCategory';
 // import Login from './components/login/login';
 
 import Default from './components/Default';
+import UserManagement from "./components/user/user-management";
 
 class App extends Component {
 
@@ -49,6 +50,7 @@ class App extends Component {
             <Route exact path="/store/admin/categories" component={_Categories} />
             <Route exact path="/store/admin/categories/add" component={_AddCategory} />
             <Route exact path="/store/admin/categories/edit/:id" component={_EditCategory} />
+            <Route exact path="/store/admin/users" component={UserManagement} />
 
             <Route exact path="/store/admin/products" component={_ProductsList} />
             <Route path="/store/admin/products/add" component={_AddProduct} />

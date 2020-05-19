@@ -26,7 +26,7 @@ class Register extends Component {
       last_name: '',
       phone: '',
       isLoading: false,
-      isLoggedIn: this.jwtService.validateToken()
+      shouldRedirect: false
     }
   }
 
@@ -36,42 +36,46 @@ class Register extends Component {
     this.setState({
       [name]: value
     })
+    console.log(this.state);
   };
 
   signUp = (event) => {
     event.preventDefault();
     this.setState({
       isLoading: true,
-      isLoggedIn: false
+      shouldRedirect: false
     });
     // get User details
     const user = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      phone: this.state.phone
     }
     // api call to login
-    this.userService.userLogin(user).then(data => {
+    this.userService.createUser(user).then(data => {
       this.setState({
         isLoading: false
       });
       if (data.data) {
         if (data.data.status) {
-          this.growl.show({ severity: 'success', summary: 'Welcome' });
-          localStorage.setItem('token', data.data.token);
+          this.growl.show({ severity: 'success', summary: 'Account Created Successfully' });
           this.setState({
-            isLoggedIn: true
+            shouldRedirect: true
           });
+
           return;
           // this.props.history.push('/store')
         } else {
-          this.growl.show({ severity: 'error', summary: 'Login Failed', detail: data.data.msg });
+          this.growl.show({ severity: 'error', summary: 'User Creation Failed', detail: data.data.msg });
         }
       }
     }).catch(error => {
       this.setState({
         isLoading: false
       });
-      this.growl.show({ severity: 'error', summary: 'Login Failed', detail: 'Please try again' });
+      this.growl.show({ severity: 'error', summary: 'Connection Error', detail: 'Please try again' });
     })
   }
 
@@ -122,11 +126,12 @@ class Register extends Component {
                       </div>
                       <div className="col-9">
                         <span className="p-float-label">
-                          <Password className="text_field" name="password" value={this.state.password} onChange={this.formUpdate} />
-                          {/*<InputText type="password" className="text_field" id="password"*/}
-                          {/*           value={this.state.password}*/}
-                          {/*           name="password"*/}
-                          {/*           onChange={this.formUpdate} />*/}
+                          <Password
+                            className="text_field
+                            " name="password"
+                            required={true}
+                            value={this.state.password}
+                            onChange={this.formUpdate} />
                           <label htmlFor="in">password</label>
                         </span>
                       </div>
@@ -143,6 +148,7 @@ class Register extends Component {
                                      id="first_name"
                                      value={this.state.first_name}
                                      name="first_name"
+                                     required={true}
                                      onChange={this.formUpdate} />
                           <label htmlFor="in">First Name</label>
                         </span>
@@ -159,8 +165,27 @@ class Register extends Component {
                                      id="last_name"
                                      value={this.state.last_name}
                                      name="last_name"
+                                     required={true}
                                      onChange={this.formUpdate} />
                           <label htmlFor="in">Last Name</label>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="row mt-4">
+                      <div className="col-3">
+                        <p>Phone</p>
+                      </div>
+                      <div className="col-9">
+                        <span className="p-float-label">
+                          <InputText className="text_field"
+                                     type="number"
+                                     id="phone"
+                                     value={this.state.phone}
+                                     name="phone"
+                                     required={true}
+                                     onChange={this.formUpdate} />
+                          <label htmlFor="in">Phone</label>
                         </span>
                       </div>
                     </div>
@@ -185,7 +210,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
-        { this.state.isLoggedIn && <Redirect to="/"/> }
+        { this.state.shouldRedirect && <Redirect to="/login"/> }
 
       </div>
     );
