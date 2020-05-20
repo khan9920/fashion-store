@@ -48,12 +48,12 @@ export default class Products extends Component {
                         this.state.products.map(product => (
                             <div key={product._id} className="col-md-4">
                                 <a onClick={() => this.onLoad(product._id)}>
-                                    <div class="product-view-wrapper">
+                                    <div className="product-view-wrapper">
                                         <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
                                         <h5>{product.name}</h5>
                                         <p>LKR {product.price}.00</p>
-                                        <div class="middle">
-                                            <div class="text">CLICK TO VIEW</div>
+                                        <div className="middle">
+                                            <div className="text">CLICK TO VIEW</div>
                                         </div>
                                     </div>
                                 </a>

@@ -1,0 +1,88 @@
+button:focus {
+    outline: 0;
+  }
+
+.common-single-product-page p {
+    margin: 0;
+}
+
+.common-single-product-page {
+    padding-top: 5%;
+}
+
+.common-single-product-page h2 {
+    font-weight: 600;
+    margin: 0;
+}
+
+.price {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.price span {
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.text-wrapper {
+    margin: 30px 0;
+}
+
+.qty-wrapper input {
+    width: 60px;
+    height: 40px;
+    text-align: center;
+}
+
+.qty-wrapper input:focus {
+    outline: 0;
+}
+
+.qty {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.product-desc, .qty {
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.common-single-product-page button {
+    background-color: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 14px;
+    padding: 14px 32px;
+    margin-right: 20px;
+}
+
+.common-single-product-page button:hover {
+    background-color: #ffffff;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 14px;
+    padding: 14px 32px;
+    margin-right: 20px;
+}
+
+.btn-wishlist {
+    padding: 10px !important;
+    position: relative;
+    top: 3px;
+}
+
+.btn-wishlist:hover {
+    padding: 10px;
+    position: relative;
+    top: 3px;
+}
+
+.common-single-product-page ion-icon {
+    font-size: 23px;
+    position: relative;
+    top: 3px;
+}

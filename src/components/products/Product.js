@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
 import { CartService } from '../../services/cartService';
+import './Product.css';
 
 export default class Product extends Component {
 
@@ -61,13 +62,30 @@ export default class Product extends Component {
     render() {
         return (
             <React.Fragment>
-                <div>
-                    <p>Name: {this.state.name}</p>
-                    <p>Category: {this.state.category}</p>
-                    <p>Descriptoin: {this.state.description}</p>
-                    <p>Price: {this.state.price}</p>
-                    <img className="productImage1" alt='productI' src={'http://localhost:4000/' + this.state.productImage} />
-                    <button type="button" onClick={() => this.onAddToCart()}>ADD TO CART</button>
+                <div className="row common-single-product-page">
+                    <div className="col-md-6">
+                        <img className="productImage" alt='productI' src={'http://localhost:4000/' + this.state.productImage} />
+                    </div>
+                    <div className="col-md-6">
+                        <h2>{this.state.name}</h2>
+                        <p className="category">{this.state.category}</p>
+
+                        <div className="text-wrapper">
+                            <p className="price"><span>LKR</span> {this.state.price}.00</p>
+                        </div>
+
+                        <div className="text-wrapper qty-wrapper">
+                            <p className="qty">Quantity</p>
+                            <input type="number" placeholder="5" />
+                        </div>
+
+                        <div className="text-wrapper">
+                            <p className="product-desc">Product Description</p>
+                            <p>{this.state.description}</p>
+                        </div>
+                        <button type="button" onClick={() => this.onAddToCart()}>ADD TO CART</button>
+                        <button className="btn-wishlist"><ion-icon name="heart-outline"></ion-icon></button>
+                    </div>
                 </div>
             </React.Fragment >
         )
