@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import StylesNavBar from './styles/NavBarStyles';
-import {JwtService} from "../services/jwtService";
-import {Redirect} from "react-router-dom";
+import { JwtService } from "../services/jwtService";
+import { Redirect } from "react-router-dom";
 import './navbar.css';
 
 export default class Navbar extends Component {
@@ -32,7 +32,7 @@ export default class Navbar extends Component {
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
-                {this.state.redirect && <Redirect to="/"/>}
+                {this.state.redirect && <Redirect to="/" />}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
@@ -48,19 +48,25 @@ export default class Navbar extends Component {
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
                         <li style={StylesNavBar.linkList}>
-                            { this.state.isLoggedIn ?
-                              <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                            {this.state.isLoggedIn ?
+                                <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                   Sign Out
                             </a> :
-                              <Link to="/login" style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                <Link to="/login" style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                   Login
                               </Link>}
                         </li>
-                        {(this.state.role === 'User') &&
+                        <Link to='/store/cart'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                             CART
-                        </li>}
+                        </li>
+                        </Link>
+                        {/* {(this.state.role === 'User') &&
+                            <li style={StylesNavBar.linkList}>
+                                <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                            CART
+                        </li>} */}
                     </ul>
                 </div>
             </div>

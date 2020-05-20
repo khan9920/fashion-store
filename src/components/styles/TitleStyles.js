@@ -5,7 +5,7 @@ export default {
         borderBottom: "1px solid #000",
         lineHeight: "0.1em",
         textTransform: 'uppercase',
-        margin: '30px 0'
+        margin: '30px 0 60px 0'
     },
     span: {
         background: "#fff",

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ProductsService } from '../../services/productsService';
+import './Products.css';
+import Title from '../Title';
 
 export default class Products extends Component {
 
@@ -33,21 +35,33 @@ export default class Products extends Component {
             })
     }
 
+    onLoad(ID) {
+        this.props.history.push(`/store/product/${ID}`);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <div className="row">
+                <Title title="THE COLLECTION" />
+                <div className="row home-produdcts-row">
                     {
                         this.state.products.map(product => (
-                            <div className="col-md-4" key={product._id}>
-                                <p>{product.name}</p>
-                                <img className="productImage" width={50} alt="" src={'http://localhost:4000/' + product.productImage} />
-                                <p>{product.price}</p>
+                            <div key={product._id} className="col-md-4">
+                                <a onClick={() => this.onLoad(product._id)}>
+                                    <div class="product-view-wrapper">
+                                        <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
+                                        <h5>{product.name}</h5>
+                                        <p>LKR {product.price}.00</p>
+                                        <div class="middle">
+                                            <div class="text">CLICK TO VIEW</div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         ))
                     }
                 </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

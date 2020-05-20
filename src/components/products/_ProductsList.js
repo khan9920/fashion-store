@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import { Link } from 'react-router-dom';
+import './_ProductList.css';
 
 export default class _ProductsList extends Component {
     productsService;
