@@ -1,3 +1,13 @@
+.shop-category-panel ul a {
+    text-decoration: none;
+    color: #000;
+}
+
+.shop-category-panel ul a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
 .shop-products-row {
     text-align: center;
 }
@@ -50,4 +60,8 @@
     color: white;
     font-size: 14px;
     padding: 16px 32px;
+  }
+
+  .shop-category {
+      font-weight: 600;
   }

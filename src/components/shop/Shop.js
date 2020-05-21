@@ -84,8 +84,8 @@ export default class Shop extends Component {
             <React.Fragment>
                 <Title title="SHOP ALL YOU WANT" />
                 <div className="row">
-                    <div className="col-md-3">
-                        <p>CATEGORIES</p>
+                    <div className="col-md-3 shop-category-panel">
+                        <p className="shop-category">CATEGORIES</p>
                         <ul>
                             {this.state.categories.map(category => (
                                 <Link to={category.url} key={category.name}>
