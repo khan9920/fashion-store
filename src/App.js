@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
 import Details from './components/Details';
 import Cart from './components/products/Cart';
+import About from './components/About';
 
 // products
 import Products from './components/products/Products';
@@ -46,6 +47,7 @@ class App extends Component {
           <Switch >
             <Route exact path="/store" component={Products} />
             <Route path="/store/details" component={Details} />
+            <Route exact path="/store/about" component={About} />
 
             <Route exact path="/store/admin/categories" component={_Categories} />
             <Route exact path="/store/admin/categories/add" component={_AddCategory} />

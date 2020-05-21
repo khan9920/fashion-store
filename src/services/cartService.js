@@ -11,7 +11,6 @@ export class CartService {
     }
 
     async updateCart(productID, userID) {
-        console.log(productID, userID);
         return (await axios.patch(`${API.URL}carts/${productID}/${userID}`));
     }
 }
