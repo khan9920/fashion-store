@@ -18,8 +18,8 @@ export default class Contact extends Component {
                                 <address>SLIIT Malabe Campus,<br />New Kandy Road,<br />Malabe</address>
                             </div>
                             <div class="wraper-phone">
-                                {/* <p className="title">Get in touch</p> */}
-                                {/* <p className="">+94 (11) 123 4567 / +94 (11) 123 4567</p> */}
+                                <p className="title">Get in touch</p>
+                                <p className="">+94 (11) 123 4567 / +94 (11) 123 4567</p>
                             </div>
 
                             <div class="wraper-email">
