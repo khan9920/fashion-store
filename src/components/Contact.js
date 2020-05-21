@@ -14,17 +14,17 @@ export default class Contact extends Component {
                     <div className="col-md-6">
                         <div class="wrapper-contact-details">
                             <div class="wrapper-address">
-                                <p className="title">Visit Us</p>
-                                <address>SLIIT Malabe Campus,<br />New Kandy Road,<br />Malabe</address>
+                                {/* <p className="title">Visit Us</p> */}
+                                {/* <address>SLIIT Malabe Campus,<br />New Kandy Road,<br />Malabe</address> */}
                             </div>
                             <div class="wraper-phone">
-                                <p className="title">Get in touch</p>
-                                <p className="">+94 (11) 123 4567 / +94 (11) 123 4567</p>
+                                {/* <p className="title">Get in touch</p> */}
+                                {/* <p className="">+94 (11) 123 4567 / +94 (11) 123 4567</p> */}
                             </div>
 
                             <div class="wraper-email">
-                                <p className="title">Say hello</p>
-                                <p className="">hello@lifeetc.com</p>
+                                {/* <p className="title">Say hello</p>
+                                <p className="">hello@lifeetc.com</p> */}
                             </div>
                         </div>
                     </div>
