@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Shop from './components/shop/Shop';
 import About from './components/About';
 import Contact from './components/Contact';
+import Wishlist from './components/products/WishList';
 import Cart from './components/products/Cart';
 
 // products
@@ -56,6 +57,7 @@ class App extends Component {
             <Route exact path="/store/admin/categories/edit/:id" component={_EditCategory} />
 
             <Route exact path="/store/product/:id" component={Product} />
+            <Route exact path="/store/wishlist" component={Wishlist} />
             <Route exact path="/store/cart/" component={Cart} />
 
             <Route exact path="/store/admin/products" component={_ProductsList} />

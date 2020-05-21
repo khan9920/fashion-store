@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
+import { WishlistService } from './../../services/wishlistService';
 import { CartService } from '../../services/cartService';
 import './Product.css';
 
 export default class Product extends Component {
 
     productsService;
-    // cartService;
+    wishlistService;
 
     constructor(props) {
         super(props);
         this.productsService = new ProductsService();
+        this.wishlistService = new WishlistService();
         this.cartService = new CartService();
         this.state = {
             _id: '',
@@ -59,6 +61,22 @@ export default class Product extends Component {
         this.props.history.push(`/store/cart`);
     }
 
+    onAddToWishList() {
+        const user_id = '5e92596655db39060cdde135';
+        const qty = 50;
+
+        let order = { product: this.state, qty };
+
+        this.wishlistService.addToWishList(order, user_id)
+            .then(result => {
+                if (result.data.message === 'success') {
+                    console.log('Success');
+                }
+            });
+
+        this.props.history.push(`/store/wishlist`);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -84,7 +102,7 @@ export default class Product extends Component {
                             <p>{this.state.description}</p>
                         </div>
                         <button type="button" onClick={() => this.onAddToCart()}>ADD TO CART</button>
-                        <button className="btn-wishlist"><ion-icon name="heart-outline"></ion-icon></button>
+                        <button className="btn-wishlist" onClick={() => this.onAddToWishList()}><ion-icon name="heart-outline"></ion-icon></button>
                     </div>
                 </div>
             </React.Fragment >
