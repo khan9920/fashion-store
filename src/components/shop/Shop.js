@@ -4,6 +4,7 @@ import { CategoriesService } from '../../services/categoriesService';
 import { ProductsService } from '../../services/productsService';
 import Title from '../Title';
 import './Shop.css';
+import Spinner from './../Spinner';
 
 export default class Shop extends Component {
 
@@ -16,7 +17,9 @@ export default class Shop extends Component {
         this.productsService = new ProductsService();
         this.state = {
             categories: [],
-            products: []
+            products: [],
+            isLoading: true,
+            isEmpty: true
         }
 
         this.onFilter = this.onFilter.bind(this);
@@ -35,13 +38,14 @@ export default class Shop extends Component {
 
                     updatedCategoryObject = {
                         name,
-                        url
+                        url,
                     }
                     updatedCategory.push(updatedCategoryObject);
                 })
 
                 this.setState({
-                    categories: updatedCategory
+                    categories: updatedCategory,
+                    isLoading: false
                 })
             })
 
@@ -83,39 +87,44 @@ export default class Shop extends Component {
         return (
             <React.Fragment>
                 <Title title="SHOP ALL YOU WANT" />
-                <div className="row">
-                    <div className="col-md-3 shop-category-panel">
-                        <p className="shop-category">CATEGORIES</p>
-                        <ul>
-                            {this.state.categories.map(category => (
-                                <Link to={category.url} key={category.name}>
-                                    <li onClick={() => this.onFilter(category.url)}>{category.name}</li>
-                                </Link>
-                            ))
-                            }
-                        </ul>
-                    </div>
-                    <div className="col-md-9">
-                        <div className="row shop-products-row">
-                            {
-                                this.state.products.map(product => (
-                                    <div key={product._id} className="col-md-4">
-                                        <a onClick={() => this.onLoad(product._id)}>
-                                            <div className="product-view-wrapper">
-                                                <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
-                                                <h5>{product.name}</h5>
-                                                <p>LKR {product.price}.00</p>
-                                                <div className="middle">
-                                                    <div className="text">CLICK TO VIEW</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                {this.state.isLoading &&
+                    <Spinner></Spinner>
+                }
+                {!this.state.isLoading &&
+                    <div className="row">
+                        <div className="col-md-3 shop-category-panel">
+                            <p className="shop-category">CATEGORIES</p>
+                            <ul>
+                                {this.state.categories.map(category => (
+                                    <Link to={category.url} key={category.name}>
+                                        <li onClick={() => this.onFilter(category.url)}>{category.name}</li>
+                                    </Link>
                                 ))
-                            }
+                                }
+                            </ul>
+                        </div>
+                        <div className="col-md-9">
+                            <div className="row shop-products-row">
+                                {
+                                    this.state.products.map(product => (
+                                        <div key={product._id} className="col-md-4">
+                                            <a onClick={() => this.onLoad(product._id)}>
+                                                <div className="product-view-wrapper">
+                                                    <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
+                                                    <h5>{product.name}</h5>
+                                                    <p>LKR {product.price}.00</p>
+                                                    <div className="middle">
+                                                        <div className="text">CLICK TO VIEW</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             </React.Fragment>
         )
     }

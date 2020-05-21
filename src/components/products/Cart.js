@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { CartService } from '../../services/cartService';
 import './Cart.css';
 import Title from './../Title';
+import Spinner from './../Spinner';
 
 export default class Cart extends Component {
 
@@ -13,7 +14,9 @@ export default class Cart extends Component {
         this.userID = '5e92596655db39060cdde135';
         this.state = {
             products: [],
-            grandTotal: ''
+            grandTotal: '',
+            isLoading: true,
+            isEmpty: true
         }
     }
 
@@ -37,7 +40,8 @@ export default class Cart extends Component {
 
                     this.setState({
                         products: totalCalculatedProducts,
-                        grandTotal
+                        grandTotal,
+                        isLoading: false
                     });
                 });
         }, 1000)

@@ -3,6 +3,7 @@ import { ProductsService } from '../../services/productsService';
 import { WishlistService } from './../../services/wishlistService';
 import { CartService } from '../../services/cartService';
 import './Product.css';
+import Spinner from './../Spinner';
 
 export default class Product extends Component {
 
@@ -25,12 +26,14 @@ export default class Product extends Component {
             discount: '',
             file: null,
         }
+        this.isLoading = true;
     }
 
     componentDidMount() {
         const ID = this.props.match.params.id;
         this.productsService.getProduct(ID)
             .then(result => {
+                this.isLoading = false;
                 this.setState({
                     _id: result.data.product._id,
                     name: result.data.product.name,
@@ -45,7 +48,6 @@ export default class Product extends Component {
     }
 
     onAddToCart() {
-
         const user_id = '5e92596655db39060cdde135';
         const qty = 50;
 
@@ -80,31 +82,36 @@ export default class Product extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="row common-single-product-page">
-                    <div className="col-md-6">
-                        <img className="productImage" alt='productI' src={'http://localhost:4000/' + this.state.productImage} />
+                {this.isLoading &&
+                    <Spinner></Spinner>
+                }
+                {!this.isLoading &&
+                    <div className="row common-single-product-page">
+                        <div className="col-md-6">
+                            <img className="productImage" alt='productI' src={'http://localhost:4000/' + this.state.productImage} />
+                        </div>
+                        <div className="col-md-6">
+                            <h2>{this.state.name}</h2>
+                            <p className="category">{this.state.category}</p>
+
+                            <div className="text-wrapper">
+                                <p className="price"><span>LKR</span> {this.state.price}.00</p>
+                            </div>
+
+                            <div className="text-wrapper qty-wrapper">
+                                <p className="qty">Quantity</p>
+                                <input type="number" placeholder="5" />
+                            </div>
+
+                            <div className="text-wrapper">
+                                <p className="product-desc">Product Description</p>
+                                <p>{this.state.description}</p>
+                            </div>
+                            <button type="button" onClick={() => this.onAddToCart()}>ADD TO CART</button>
+                            <button className="btn-wishlist" onClick={() => this.onAddToWishList()}><ion-icon name="heart-outline"></ion-icon></button>
+                        </div>
                     </div>
-                    <div className="col-md-6">
-                        <h2>{this.state.name}</h2>
-                        <p className="category">{this.state.category}</p>
-
-                        <div className="text-wrapper">
-                            <p className="price"><span>LKR</span> {this.state.price}.00</p>
-                        </div>
-
-                        <div className="text-wrapper qty-wrapper">
-                            <p className="qty">Quantity</p>
-                            <input type="number" placeholder="5" />
-                        </div>
-
-                        <div className="text-wrapper">
-                            <p className="product-desc">Product Description</p>
-                            <p>{this.state.description}</p>
-                        </div>
-                        <button type="button" onClick={() => this.onAddToCart()}>ADD TO CART</button>
-                        <button className="btn-wishlist" onClick={() => this.onAddToWishList()}><ion-icon name="heart-outline"></ion-icon></button>
-                    </div>
-                </div>
+                }
             </React.Fragment >
         )
     }
