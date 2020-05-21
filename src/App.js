@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Details from './components/Details';
 import Cart from './components/products/Cart';
 import About from './components/About';
+import Contact from './components/Contact';
 
 // products
 import Products from './components/products/Products';
@@ -48,6 +49,7 @@ class App extends Component {
             <Route exact path="/store" component={Products} />
             <Route path="/store/details" component={Details} />
             <Route exact path="/store/about" component={About} />
+            <Route exact path="/store/contact" component={Contact} />
 
             <Route exact path="/store/admin/categories" component={_Categories} />
             <Route exact path="/store/admin/categories/add" component={_AddCategory} />
@@ -63,7 +65,6 @@ class App extends Component {
             {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
 
             {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
-
 
             <Route component={Default} />
           </Switch>
