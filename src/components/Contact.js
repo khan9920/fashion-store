@@ -23,8 +23,8 @@ export default class Contact extends Component {
                             </div>
 
                             <div class="wraper-email">
-                                {/* <p className="title">Say hello</p>
-                                <p className="">hello@lifeetc.com</p> */}
+                                <p className="title">Say hello</p>
+                                <p className="">hello@lifeetc.com</p>
                             </div>
                         </div>
                     </div>
