@@ -14,7 +14,7 @@ export default class Contact extends Component {
                     <div className="col-md-6">
                         <div class="wrapper-contact-details">
                             <div class="wrapper-address">
-                                {/* <p className="title">Visit Us</p> */}
+                                <p className="title">Visit Us</p>
                                 {/* <address>SLIIT Malabe Campus,<br />New Kandy Road,<br />Malabe</address> */}
                             </div>
                             <div class="wraper-phone">
