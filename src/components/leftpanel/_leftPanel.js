@@ -9,7 +9,7 @@ export default class _leftPanel extends Component {
                 <ul>
                     <li><Link to='/store/admin/products'>PRODUCTS</Link></li>
                     <li><Link to='/store/admin/categories'>CATEGORIES</Link></li>
-                    <li><Link to='/store/admin/sales'>SALES</Link></li>
+                    <li><Link to='/store/admin/orders'>ORDERS</Link></li>
                     <li><Link to='/store/admin/users'>USERS</Link></li>
                 </ul>
             </div>

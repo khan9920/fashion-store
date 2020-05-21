@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { CartService } from '../../services/cartService';
 import './Cart.css';
+import Title from './../Title';
 
 export default class Cart extends Component {
 
@@ -70,9 +71,14 @@ export default class Cart extends Component {
         }
     }
 
+    onPurchase() {
+        this.props.history.push(`/store/purchase`);
+    }
+
     render() {
         return (
             <div>
+                <Title title="YOUR CART" />
                 <div className="row">
                     <table className="table">
                         <thead>
@@ -93,7 +99,6 @@ export default class Cart extends Component {
                                             <div className="product-text-wrapper">
                                                 <p className="text-1">{result.product.name}</p>
                                                 <p className="text-2"><span>Category :</span> {result.product.category}</p>
-
                                             </div>
                                         </div>
                                     </td>
@@ -110,6 +115,11 @@ export default class Cart extends Component {
                     <div className="col-md-12">
                         <div className="total-wrapper">
                             <p className="text-total"><span>TOTAL : </span>LKR {this.state.grandTotal}.00</p>
+                            <p>SELECT PAYMENT METHOD</p>
+                            <select name="paymentMethod">
+                                <option value="cash">CASH ON DELIVERY</option>
+                                <option value="card">VISA CARD</option>
+                            </select>
                             <br />
                             <button type="button" onClick={() => this.onPurchase()}>PURCHASE</button>
                         </div>

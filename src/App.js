@@ -9,10 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components
 import Navbar from './components/Navbar';
-import Details from './components/Details';
-import Cart from './components/products/Cart';
+import Shop from './components/shop/Shop';
 import About from './components/About';
 import Contact from './components/Contact';
+import Cart from './components/products/Cart';
 
 // products
 import Products from './components/products/Products';
@@ -47,7 +47,7 @@ class App extends Component {
           <Navbar />
           <Switch >
             <Route exact path="/store" component={Products} />
-            <Route path="/store/details" component={Details} />
+            <Route exact path="/store/shop" component={Shop} />
             <Route exact path="/store/about" component={About} />
             <Route exact path="/store/contact" component={Contact} />
 

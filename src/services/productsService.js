@@ -6,6 +6,10 @@ export class ProductsService {
         return (await axios.get(`${API.URL}products`));
     }
 
+    async getProductsFiltered(category) {
+        return (await axios.get(`${API.URL}products/${category}`));
+    }
+
     async getProduct(ID) {
         return (await axios.get(`${API.URL}products/${ID}`));
     }
