@@ -27,6 +27,7 @@ export default class Product extends Component {
             file: null,
         }
         this.isLoading = true;
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -47,11 +48,19 @@ export default class Product extends Component {
             });
     }
 
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        });
+    }
+
     onAddToCart() {
         const user_id = '5e92596655db39060cdde135';
-        const qty = 50;
+        const qty = this.state.quantity;
 
-        let order = { product: this.state, qty };
+        let order = { product: this.state, qty};
 
         this.cartService.addToCart(order, user_id)
             .then(result => {
@@ -100,7 +109,7 @@ export default class Product extends Component {
 
                             <div className="text-wrapper qty-wrapper">
                                 <p className="qty">Quantity</p>
-                                <input type="number" placeholder="5" />
+                                <input type="number" placeholder="5" name="quantity" onChange={this.handleChange} />
                             </div>
 
                             <div className="text-wrapper">
