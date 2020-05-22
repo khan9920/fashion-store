@@ -35,4 +35,9 @@ export class UserService {
       `users/roles?limit=${limit}&page=${page + 1}&search=${search}&column=${column}&order=${order}&status=${status}&roles[]${roles}`,
       this.setHeaders()));
   }
+
+  async deleteUser(id) {
+    return (await axios.delete(API.URL +
+      `users/?id=${id}`));
+  }
 }

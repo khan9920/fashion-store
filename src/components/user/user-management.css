@@ -15,6 +15,14 @@
     border-radius: 3px;
 }
 
+.p-button {
+    border: none !important;
+}
+
+.p-button:hover {
+    background: rgba(0, 0, 0, 0.78) !important;
+}
+
 .p-link:focus {
     box-shadow: none !important;
 }
@@ -25,4 +33,13 @@
 
 .p-datatable .p-datatable-thead > tr > th {
     background: #fff !important;
+}
+
+.modal-header {
+    background: black;
+    color: white;
+}
+
+.modal-header .close {
+    color: white;
 }
