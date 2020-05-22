@@ -20,7 +20,7 @@ export default class _AddProduct extends Component {
             category: '',
             quantity: '',
             description: '',
-            discount: '',
+            discount: 0,
             file: null,
             categories: []
         }

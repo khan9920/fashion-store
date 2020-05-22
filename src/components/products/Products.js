@@ -23,13 +23,14 @@ export default class Products extends Component {
                 let products = [];
                 result.data.products.map(product => {
                     if (product.discount === 0) {
+                        product.isDiscounted = false;
+                        products.push(product);
+                    } else {
+                        product.originalPrice = product.price;
+                        product.price = product.price - (product.price * (product.discount / 100));
+                        product.isDiscounted = true;
                         products.push(product);
                     }
-
-                    product.originalPrice = product.price;
-                    product.price = product.price - (product.price * (product.discount / 100));
-
-                    products.push(product);
                 });
                 this.setState({
                     isLoading: false,
@@ -58,7 +59,12 @@ export default class Products extends Component {
                                         <div className="product-view-wrapper">
                                             <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
                                             <h5>{product.name}</h5>
-                                            <p>LKR {product.price}.00</p>
+                                            {!product.isDiscounted &&
+                                                <p><span className="actual-price">LKR {product.price}.00</span> </p>
+                                            }
+                                            {product.isDiscounted &&
+                                                <p><span className="original-price">LKR <span className="strike-through-text">{product.originalPrice}.00</span></span> <span className="actual-price">LKR {product.price}.00</span> </p>
+                                            }
                                             <div className="middle">
                                                 <div className="text">CLICK TO VIEW</div>
                                             </div>

@@ -51,3 +51,12 @@
     font-size: 14px;
     padding: 16px 32px;
   }
+
+  .strike-through-text {
+    text-decoration: line-through;  
+  }
+
+  .actual-price {
+    font-size: 18px;
+    font-weight: 600;
+  }

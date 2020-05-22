@@ -86,3 +86,67 @@ button:focus {
     position: relative;
     top: 3px;
 }
+
+.strike-through-text {
+    text-decoration: line-through;  
+  }
+
+
+.feedback-form .col-md-12 {
+    padding-left: 0;
+}
+
+.feedback-form label,
+.feedback-form textarea {
+      display: block;
+}
+
+.feedback-form button {
+      margin-top: 10px;
+}
+
+.dv-star-rating i {
+    font-style: normal;
+    font-size: 25px;
+    margin-right: 5px;
+}
+
+textarea:focus {
+    outline: 0;
+}
+
+.avgRating i {
+    font-size: 15px;
+}
+
+.avg-rating-text {
+    display: inline-block;
+    position: relative;
+    top: -11px;
+}
+
+.riview-card {
+    margin-bottom: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0 10px 10px 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.riview-card .name {
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.riview-card .dv-star-rating i {
+    font-size: 15px;
+    display: inline-block;
+    position: relative;
+    top: 12px;
+    left: 13px;
+}
+
+.comment {
+    font-size: 12px;
+}
