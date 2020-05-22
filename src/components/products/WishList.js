@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { WishlistService } from './../../services/wishlistService';
+import { CartService } from '../../services/cartService';
 import Title from '../Title';
 import './WishList.css';
 import Spinner from './../Spinner';
@@ -10,13 +11,19 @@ export default class WishList extends Component {
 
     constructor(props) {
         super(props);
+
         this.wishlistService = new WishlistService();
+        this.cartService = new CartService();
+
         this.userID = '5e92596655db39060cdde135';
         this.state = {
             products: [],
             isLoading: true,
-            wishListIsEmpty: true
+            wishListIsEmpty: true,
+            quantity: '',
         }
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +59,39 @@ export default class WishList extends Component {
         }
     }
 
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    onAddToCart(productID) {
+        const user_id = '5e92596655db39060cdde135';
+        const qty = this.state.quantity;
+
+        let order;
+
+        this.state.products.map(product => {
+            if (product.product._id === productID) {
+                order = {
+                    product: product.product,
+                    qty
+                };
+            }
+        })
+
+        this.cartService.addToCart(order, user_id)
+            .then(result => {
+                if (result.data.message === 'success') {
+                    console.log('Success');
+                }
+            });
+
+        this.props.history.push(`/store/cart`);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -73,6 +113,9 @@ export default class WishList extends Component {
                                         </div>
                                     </div>
                                 </a>
+                                <p className="qty">Quantity</p>
+                                <input type="number" placeholder="5" name="quantity" onChange={this.handleChange} />
+                                <button type="button" onClick={() => this.onAddToCart(product.product._id)}>ADD TO CART</button>
                             </div>
                         ))
                     }

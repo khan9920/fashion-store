@@ -138,9 +138,28 @@ export default class Product extends Component {
             comment: this.state.comment
         };
 
-        this.reviewService.addReview(review);
-    }
+        this.reviewService.addReview(review).then(result => {
+            if (result.data.status === 'success') {
+                this.state.reviews.push(review);
 
+
+                let totalRating = 0;
+                let count = 0;
+                let avg = 0;
+
+                this.state.reviews.map(review => {
+                    totalRating += review.rating;
+                    count++;
+                })
+
+                avg = Math.round(totalRating / count).toFixed(2);
+                this.setState({
+                    comment: '',
+                    ratingAvg: avg
+                });
+            };
+        });
+    }
 
     render() {
         const { rating } = this.state;
