@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ProductsService } from '../../services/productsService';
 import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
+import './_ProductList.css';
 
 export default class _EditProduct extends Component {
     productsService;
