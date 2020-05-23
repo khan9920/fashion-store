@@ -4,6 +4,7 @@ import { CartService } from '../../services/cartService';
 import Title from '../Title';
 import './WishList.css';
 import Spinner from './../Spinner';
+import { JwtService } from "./../../services/jwtService";
 
 export default class WishList extends Component {
 
@@ -14,21 +15,25 @@ export default class WishList extends Component {
 
         this.wishlistService = new WishlistService();
         this.cartService = new CartService();
+        this.jwtService = new JwtService();
 
-        this.userID = '5e92596655db39060cdde135';
         this.state = {
             products: [],
             isLoading: true,
             wishListIsEmpty: true,
             quantity: '',
+            userID: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
+        this.setState({
+            userID: this.jwtService.validateToken().id,
+        })
         setTimeout(() => {
-            this.wishlistService.getWishList(this.userID)
+            this.wishlistService.getWishList(this.state.userID)
                 .then(result => {
                     this.setState({
                         isLoading: false,
@@ -45,7 +50,7 @@ export default class WishList extends Component {
 
     onRemoveItem(productID) {
         if (window.confirm('Are you sure..?')) {
-            this.wishlistService.updateWishList(productID, this.userID)
+            this.wishlistService.updateWishList(productID, this.state.userID)
                 .then(result => {
                     if (result.data.status === 'success') {
 
@@ -68,7 +73,7 @@ export default class WishList extends Component {
     }
 
     onAddToCart(productID) {
-        const user_id = '5e92596655db39060cdde135';
+        const user_id = this.state.userID;
         const qty = this.state.quantity;
 
         let order;
@@ -114,7 +119,7 @@ export default class WishList extends Component {
                                     </div>
                                 </a>
                                 <p className="qty">Quantity</p>
-                                <input type="number" placeholder="5" name="quantity" onChange={this.handleChange} />
+                                <input type="number" placeholder="1" name="quantity" onChange={this.handleChange} />
                                 <button className="action-button" type="button" onClick={() => this.onAddToCart(product.product._id)}>ADD TO CART</button>
                             </div>
                         ))

@@ -6,6 +6,7 @@ import './Product.css';
 import Spinner from './../Spinner';
 import StarRatingComponent from 'react-star-rating-component';
 import { ReviewService } from '../../services/reviewService';
+import { JwtService } from "./../../services/jwtService";
 
 
 export default class Product extends Component {
@@ -21,6 +22,9 @@ export default class Product extends Component {
         this.wishlistService = new WishlistService();
         this.cartService = new CartService();
         this.reviewService = new ReviewService()
+        this.jwtService = new JwtService();
+
+        this.user_ID = '';
 
         this.isDiscounted = false;
         this.state = {
@@ -36,7 +40,7 @@ export default class Product extends Component {
             file: null,
             rating: 1,
             comment: '',
-            user_ID: '5e92596655db39060cdde135',
+            // user_ID: '',
             reviews: [],
             ratingAvg: ''
         }
@@ -47,6 +51,7 @@ export default class Product extends Component {
 
     componentDidMount() {
         const ID = this.props.match.params.id;
+
         this.productsService.getProduct(ID)
             .then(result => {
                 this.isLoading = false;
@@ -69,12 +74,21 @@ export default class Product extends Component {
                     originalPrice: product.originalPrice,
                     price: product.price,
                     category: product.category,
-                    quantity: product.quantity,
+                    quantity: 1,
                     description: product.description,
                     discount: product.discount,
                 });
             });
 
+        // const jwtverification = this.jwtService.validateToken().id;
+
+        if (localStorage.getItem('token')) {
+            this.user_ID = this.jwtService.validateToken().id;
+        } else {
+            this.user_ID = '';
+        }
+
+        // console.log(this.user_ID);
 
         this.reviewService.getReviews(ID)
             .then(results => {
@@ -94,35 +108,41 @@ export default class Product extends Component {
     }
 
     onAddToCart() {
-        const user_id = '5e92596655db39060cdde135';
-        const qty = this.state.quantity;
+        if (this.user_ID) {
+            const qty = this.state.quantity;
 
-        let order = { product: this.state, qty };
+            let order = { product: this.state, qty };
 
-        this.cartService.addToCart(order, user_id)
-            .then(result => {
-                if (result.data.message === 'success') {
-                    console.log('Success');
-                }
-            });
+            this.cartService.addToCart(order, this.user_ID)
+                .then(result => {
+                    if (result.data.message === 'success') {
+                        console.log('Success');
+                    }
+                });
 
-        this.props.history.push(`/store/cart`);
+            this.props.history.push(`/store/cart`);
+        } else {
+            alert('Please log in to add this to the cart')
+        }
     }
 
     onAddToWishList() {
-        const user_id = '5e92596655db39060cdde135';
-        const qty = 50;
+        if (this.user_ID) {
+            const qty = this.state.quantity;
 
-        let order = { product: this.state, qty };
+            let order = { product: this.state, qty };
 
-        this.wishlistService.addToWishList(order, user_id)
-            .then(result => {
-                if (result.data.message === 'success') {
-                    console.log('Success');
-                }
-            });
+            this.wishlistService.addToWishList(order, this.user_ID)
+                .then(result => {
+                    if (result.data.message === 'success') {
+                        console.log('Success');
+                    }
+                });
 
-        this.props.history.push(`/store/wishlist`);
+            this.props.history.push(`/store/wishlist`);
+        } else {
+            alert('Please log in to add this to the wishlist')
+        }
     }
 
     onStarClick(nextValue, prevValue, name) {
@@ -197,7 +217,7 @@ export default class Product extends Component {
 
                                     <div className="text-wrapper qty-wrapper">
                                         <p className="qty">Quantity</p>
-                                        <input type="number" placeholder="5" name="quantity" onChange={this.handleChange} />
+                                        <input type="number" placeholder="1" name="quantity" onChange={this.handleChange} />
                                     </div>
 
                                     <div className="text-wrapper">
@@ -209,30 +229,34 @@ export default class Product extends Component {
                                 </div>
                             </div>
                             <hr />
-                            <form action="" className="feedback-form">
-                                <div className="col-md-12">
-                                    <p className="product-desc">ADD REVIEW</p>
-                                </div>
-                                <div className="col-md-12">
-                                    <StarRatingComponent
-                                        name="rate1"
-                                        starCount={5}
-                                        value={rating}
-                                        onStarClick={this.onStarClick.bind(this)}
-                                    />
-                                </div>
-                                <div className="col-md-12">
-                                    <label>Comments or Feedback</label>
-                                    <textarea name="comment" id="" cols="50" rows="3" onChange={this.handleChange} value={this.state.comment}></textarea>
-                                    <button type="button" onClick={() => this.onAddFeedback()}>SUBMIT</button>
-                                </div>
-                            </form>
+                            {this.user_ID &&
+                                <form action="" className="feedback-form">
+                                    <div className="col-md-12">
+                                        <p className="product-desc">ADD REVIEW</p>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <StarRatingComponent
+                                            name="rate1"
+                                            starCount={5}
+                                            value={rating}
+                                            onStarClick={this.onStarClick.bind(this)}
+                                        />
+                                    </div>
+                                    <div className="col-md-12">
+                                        <label>Comments or Feedback</label>
+                                        <textarea name="comment" id="" cols="50" rows="3" onChange={this.handleChange} value={this.state.comment}></textarea>
+                                        <button type="button" onClick={() => this.onAddFeedback()}>SUBMIT</button>
+                                    </div>
+                                </form>
+                            }
                         </div>
-                        <div className="col-md-12">
-                            <p className="product-desc">REVIEWS</p>
-                        </div>
+                        {this.user_ID &&
+                            <div className="col-md-12">
+                                <p className="product-desc">REVIEWS</p>
+                            </div>
+                        }
 
-                        {this.state.reviews.map(review => (
+                        {this.user_ID && this.state.reviews.map(review => (
                             <div className="col-md-3" key={review._id}>
                                 <div class="riview-card">
                                     <p class="name">{review.name}</p>

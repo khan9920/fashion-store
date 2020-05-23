@@ -25,4 +25,9 @@ export class ProductsService {
     async deleteProduct(ID) {
         return (await axios.delete(`${API.URL}products/${ID}`));
     }
+
+    async getUser(ID) {
+        console.log(ID);
+        return (await axios.get(`${API.URL}products/getuser/${ID}`));
+    }
 }
