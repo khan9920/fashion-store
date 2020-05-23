@@ -1,0 +1,121 @@
+.product-card {
+    background-color: #fff;
+    border: 1px solid #000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-card label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.product-card img {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.actions p ion-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.actions p button {
+    background: none;
+    border: none;
+    width: 30px;
+    text-align: center;
+    padding: 0;
+}
+
+.form-title {
+    font-size: 18px;
+}
+
+.product-form label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.product-form input {
+    width: 80%;
+    padding: 8px 4px;
+    font-size: 13px;
+    border-radius: 5px;
+    border: 2px solid;
+    margin-bottom: 10px;
+}
+
+.button-col button {
+    float: right;
+}
+
+.image-section input {
+    border: none;
+}
+
+.button-col button {
+    background-color: #000;
+    border: 2px solid #000;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.button-col button:hover {
+    background-color: #fff;
+    border: 2px solid #000;
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    background-color: #000;
+    border: 2px solid #000;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 200px;
+}
+
+.productImage1 {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 10px;
+}
+
+.add-button  {
+   
+    background-color: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+
+.add-button:hover {
+    background-color: #ffffff;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 5px;
+    margin-right: 20px;
+}

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Card} from 'primereact/card';
+import React, { Component } from 'react';
+import { Card } from 'primereact/card';
 import './login.css';
-import {Button} from 'primereact/button';
-import {InputText} from 'primereact/inputtext';
-import {UserService} from "../../services/userService";
-import {Link, Redirect} from 'react-router-dom';
-import {JwtService} from "../../services/jwtService";
-import {Growl} from 'primereact/growl';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { UserService } from "../../services/userService";
+import { Link, Redirect } from 'react-router-dom';
+import { JwtService } from "../../services/jwtService";
+import { Growl } from 'primereact/growl';
 
 
 class MyComponent extends Component {
@@ -144,7 +144,7 @@ class MyComponent extends Component {
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
                         <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
-                                icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
+                          icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{ marginRight: '.25em' }} />;
                       </div>
                     </div>
                   </form>
@@ -154,7 +154,7 @@ class MyComponent extends Component {
             </div>
           </div>
         </div>
-        { this.state.isLoggedIn && <Redirect to="/"/> }
+        {this.state.isLoggedIn && <Redirect to="/" />}
 
       </div>
     );

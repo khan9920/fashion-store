@@ -1,0 +1,106 @@
+.table thead th {
+    border-top: 0;
+}
+
+.table td {
+    border-top: 0;
+}
+
+.product-wrapper img {
+    width: 100px;
+}
+
+.product-wrapper img, .product-text-wrapper {
+    display: inline-block;
+}
+.product-text-wrapper {
+    padding-left: 40px;
+}
+
+.product-text-wrapper .text-1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.product-text-wrapper .text-2 {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.product-text-wrapper span {
+    text-transform: initial;
+    font-weight: 500;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.text-top-center {
+    position: relative;
+    top: 35px;
+}
+
+.btn-remove {
+    border: 1px solid #000;
+    background-color: #000;
+}
+
+.btn-remove:hover {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-remove ion-icon {
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+    top: 4px;
+}
+
+.btn-remove ion-icon:hover {
+    color: #000;
+    font-size: 20px;
+    position: relative;
+    top: 4px;
+}
+
+.total-wrapper {
+    border-top: 1px solid;
+    padding: 20px 40px 20px 0;
+    text-align: right;
+}
+
+.text-total {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.text-total span {
+    font-size: 16px;
+}
+
+.total-wrapper button {
+    background-color: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 14px;
+    padding: 14px 32px;
+}
+
+.total-wrapper button:hover {
+    background-color: #ffffff;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 14px;
+    padding: 14px 32px;
+}
+
+

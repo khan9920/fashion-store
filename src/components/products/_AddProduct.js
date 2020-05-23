@@ -20,7 +20,7 @@ export default class _AddProduct extends Component {
             category: '',
             quantity: '',
             description: '',
-            discount: '',
+            discount: 0,
             file: null,
             categories: []
         }
@@ -36,8 +36,6 @@ export default class _AddProduct extends Component {
                 this.setState({
                     categories: results.data.categories
                 })
-                // this.state.
-                console.log(this.state.categories);
             });
     }
 
@@ -117,6 +115,7 @@ export default class _AddProduct extends Component {
                                         <div className="col-md-12">
                                             <label>Category</label>
                                             <select name="category" onChange={this.handleChange}>
+                                                <option>SELECT CATEGORY</option>
                                                 {
                                                     this.state.categories.map(category => (
                                                         <option key={category._id} value={category.name}>{category.name}</option>
@@ -143,7 +142,6 @@ export default class _AddProduct extends Component {
                                     <div className="col-md-12 button-col">
                                         <input type="hidden" name="id" value={this.state._id} />
                                         <button type="submit">SAVE</button>
-                                        {/* <button type="button">CANCEL</button> */}
                                     </div>
                                 </div>
                             </form>

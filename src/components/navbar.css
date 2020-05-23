@@ -5,3 +5,13 @@
 .link:hover {
     text-decoration: underline !important;
 }
+
+.nav-list a {
+    text-decoration: none;
+    color: #000;
+}
+
+.nav-list a:hover {
+    text-decoration: underline;
+    color: #000;
+}

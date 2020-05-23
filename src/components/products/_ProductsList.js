@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import { Link } from 'react-router-dom';
+import './_ProductList.css';
 
 export default class _ProductsList extends Component {
     productsService;
@@ -48,7 +49,7 @@ export default class _ProductsList extends Component {
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
                         <Link to="/store/admin/products/add">
-                            <button>ADD PRODUCTS</button>
+                            <button className="add-button">ADD PRODUCTS</button>
                         </Link>
                         {
                             this.state.products.map(product => (

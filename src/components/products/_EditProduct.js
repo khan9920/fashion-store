@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { ProductsService } from '../../services/productsService';
+import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 
 export default class _EditProduct extends Component {
     productsService;
-
+    CategoriesService;
     constructor(props) {
         super(props);
         this.productsService = new ProductsService()
+        this.categoriesService = new CategoriesService();
         this.state = {
             _id: '',
             name: '',
@@ -18,6 +20,7 @@ export default class _EditProduct extends Component {
             description: '',
             discount: '',
             file: null,
+            categories : []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,7 +43,14 @@ export default class _EditProduct extends Component {
                     description: result.data.product.description,
                     discount: result.data.product.discount
                 });
+            })
+            this.categoriesService.getCategories()
+            .then(results => {
+                this.setState({
+                    categories: results.data.categories
+                })
             });
+
     }
 
     handleChange(event) {
@@ -126,7 +136,15 @@ export default class _EditProduct extends Component {
                                         </div>
                                         <div className="col-md-12">
                                             <label>Category</label>
-                                            <input type="text" name="category" value={this.state.category} onChange={this.handleChange} placeholder="category" />
+                                            <select name="category" onChange={this.handleChange}>
+                                                <option>{this.state.category}</option>
+                                                {
+                                                    this.state.categories.map(category => (
+                                                        <option key={category._id} value={category.name}>{category.name}</option>
+                                                    ))
+                                                }
+                                                }
+                                            </select>
                                         </div>
                                         <div className="col-md-12">
                                             <label>Discount</label>
