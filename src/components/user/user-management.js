@@ -9,15 +9,22 @@ import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import DeleteDialog from "./delete-dialog";
 import AddUserModal from "./add-user-modal";
+import {JwtService} from "../../services/jwtService";
+import Spinner from "../Spinner";
 
 class UserManagement extends Component {
   // Services
   userService;
   editModel;
+  jwtService;
 
-  constructor() {
-    super();
+  userRole = '';
+
+  constructor(props) {
+    super(props);
     this.userService = new UserService();
+    this.jwtService = new JwtService();
+    this.userRole = this.jwtService.validateToken().role;
     this.state = {
       // User data state
       users: [
@@ -30,12 +37,14 @@ class UserManagement extends Component {
         column: 1,
         order: 'asc',
         status: 'active',
-        roles: 'roles%5B%5D=Store%20Manager&roles%5B%5D=User&roles%5B%5D=Admin'
+        roles: this.userRole === 'Admin' ? 'roles%5B%5D=Store%20Manager&roles%5B%5D=User&roles%5B%5D=Admin' : 'roles%5B%5D=User'
       },
       rows: 2,
       recordsTotal: 0,
+      isLoading: true,
       // modal dialog state
       dialogVisible: false,
+      role: this.userRole,
       addUserModalVisible: false,
       // ----------------------
       addUserModal: false,
@@ -63,6 +72,7 @@ class UserManagement extends Component {
         if (data.data.status) { // Check the status
           this.setState({
             users: data.data.data, // add data to data table
+            isLoading: false,
             recordsTotal: data.data.recordsTotal // add records total for pagination
           })
         } else {
@@ -108,7 +118,7 @@ class UserManagement extends Component {
         id: id
       })
     } else {
-      console.log('edit ' + id);
+      this.props.history.push(`/store/admin/users/${id}`);
     }
   }
 
@@ -138,10 +148,20 @@ class UserManagement extends Component {
     const header = <div>
       <div className="row">
         <div className="col-3 text-right">
-          <Button className="user-add-btn py-1" id="submit" onClick={() => {this.setState({addUserModalVisible: true})}} type="submit" label="Add New User" style={{marginRight: '.25em'}}/>
+          { this.state.role === 'Admin' && <Button className="user-add-btn py-1" id="submit"
+                  onClick={() => {this.setState({addUserModalVisible: true})}}
+                  type="submit" label="Add New User"
+                  style={{marginRight: '.25em'}}/>}
         </div>
-        <div className="col-9">
-          <InputText onKeyUp={this.search}/>
+        <div className="col-9 d-flex justify-content-end">
+          <div className="row">
+            <div className="col-3 mt-2">
+              Search:
+            </div>
+            <div className="col-6">
+              <InputText onKeyUp={this.search}/>
+            </div>
+          </div>
         </div>
       </div>
     </div>;
@@ -150,6 +170,7 @@ class UserManagement extends Component {
     return (
       <div>
         {/*Modal to delete users */}
+        {this.state.isLoading && <Spinner/>}
         <DeleteDialog id={this.state.id} show={this.state.dialogVisible}
                       onHide={() => {this.setState({dialogVisible: false})}}
                       close={() => {this.delete()}}/>
@@ -158,7 +179,7 @@ class UserManagement extends Component {
           <div className="row">
             <LeftPanel/>
             <div className="col-md-10">
-              <DataTable totalRecords={120}
+              {!this.state.isLoading && <DataTable totalRecords={120}
                          value={this.state.users}
                          footer={this.state.users.length > 0 ? <Paginator
                            first={this.state.first}
@@ -177,7 +198,7 @@ class UserManagement extends Component {
                 <Column field="role" header="Role" className="text-center" style={{width: "10%"}} sortable={true}/>
                 <Column body={this.actionTemplate} header="Actions" style={{width: "20%"}} className="text-center"/>
 
-              </DataTable>
+              </DataTable> }
             </div>
           </div>
         </React.Fragment>

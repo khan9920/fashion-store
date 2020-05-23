@@ -25,7 +25,7 @@ export default class Navbar extends Component {
         this.setState({
             isLoggedIn: false,
             role: null,
-            redirect: true
+            redirect: false
         });
     };
 
@@ -38,6 +38,11 @@ export default class Navbar extends Component {
                 </div>
                 <div className="col-md-10 nav-list">
                     <ul style={StylesNavBar.navListUl}>
+                        {
+                            (this.state.role && this.state.role !== 'User') && <li style={StylesNavBar.linkList}>
+                                <Link to='/store/admin/products' style={StylesNavBar.linktListA}>Dashboard</Link>
+                            </li>
+                        }
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/shop' style={StylesNavBar.linktListA}>SHOP</Link>
                         </li>
@@ -47,18 +52,18 @@ export default class Navbar extends Component {
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
-                        <Link to='/store/wishlist'>
+                        { ( this.state.role !== 'Admin' && this.state.role !== 'Store Manager') && <Link to='/store/wishlist'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="heart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 WISHLIST
                             </li>
-                        </Link>
-                        <Link to='/store/cart'>
+                        </Link> }
+                        { ( this.state.role !== 'Admin' && this.state.role !== 'Store Manager') &&  <Link to='/store/cart'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 CART
                             </li>
-                        </Link>
+                        </Link>}
                         <li style={StylesNavBar.linkList}>
                             {this.state.isLoggedIn ?
                                 <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>

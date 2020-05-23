@@ -44,4 +44,14 @@ export class UserService {
     return (await axios.delete(API.URL +
       `users/?id=${id}`));
   }
+
+  async getUserById(id) {
+    return (await axios.get(API.URL +
+    `users?id=${id}`));
+  }
+
+  async updateUser(body) {
+    return (await axios.put(API.URL +
+    'users', body, this.setHeaders()));
+  }
 }

@@ -5,7 +5,7 @@ import './Spinner.css';
 export default class Spinner extends Component {
     render() {
         return (
-            <div class="spinner">
+            <div className="spinner">
                 <Loader
                     type="Puff"
                     color="#000"

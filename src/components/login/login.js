@@ -25,6 +25,8 @@ class MyComponent extends Component {
       isLoading: false,
       isLoggedIn: this.jwtService.validateToken()
     }
+
+    console.log(this.state.isLoggedIn);
   }
 
   formUpdate = (event) => {

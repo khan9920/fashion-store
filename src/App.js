@@ -32,6 +32,7 @@ import _EditCategory from './components/categories/_EditCategory';
 
 import Default from './components/Default';
 import UserManagement from "./components/user/user-management";
+import EditUser from "./components/user/edit-user";
 
 class App extends Component {
 
@@ -56,7 +57,6 @@ class App extends Component {
             <Route exact path="/store/admin/categories" component={_Categories} />
             <Route exact path="/store/admin/categories/add" component={_AddCategory} />
             <Route exact path="/store/admin/categories/edit/:id" component={_EditCategory} />
-            <Route exact path="/store/admin/users" component={UserManagement} />
 
             <Route exact path="/store/product/:id" component={Product} />
             <Route exact path="/store/wishlist" component={Wishlist} />
@@ -65,6 +65,9 @@ class App extends Component {
             <Route exact path="/store/admin/products" component={_ProductsList} />
             <Route path="/store/admin/products/add" component={_AddProduct} />
             <Route path="/store/admin/products/edit/:id" component={_EditProduct} />
+
+            <Route exact path="/store/admin/users" component={UserManagement} />
+            <Route exact path="/store/admin/users/:id" component={EditUser} />
 
             {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
 
