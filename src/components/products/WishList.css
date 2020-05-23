@@ -61,18 +61,20 @@
         background-color: #000;
         border: 1px solid #000;
         color: white;
-        font-size: 14px;
-        padding: 14px 32px;
+        font-size: 10px;
+        padding: 10px 25px;
         margin-right: 20px;
+        margin-bottom: 10px;
     }
     
 .action-button:hover {
         background-color: #ffffff;
         border: 1px solid #000;
         color: #000;
-        font-size: 14px;
-        padding: 14px 32px;
+        font-size: 10px;
+        padding: 10px 25px;
         margin-right: 20px;
+        margin-bottom: 10px;
     }
 
 
