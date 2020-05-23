@@ -59,7 +59,10 @@ export default class _AddProduct extends Component {
         event.preventDefault();
         if (event) {
             const data = this.state;
-            const fd = new FormData();
+            if(data.name === '' || data.productImage === '' || data.price==='' || data.quantity === '' || data.description ===''){
+                alert("Filed must be filled");
+            }else{
+                const fd = new FormData();
             fd.append("name", data.name);
             fd.append("productImage", data.productImage, data.productImage.name);
             fd.append("price", data.price);
@@ -73,6 +76,8 @@ export default class _AddProduct extends Component {
                     this.props.history.push('/store/admin/products');
                 };
             });
+            }
+            
         }
     }
 
