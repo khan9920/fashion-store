@@ -49,7 +49,7 @@ export default class _ProductsList extends Component {
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
                         <Link to="/store/admin/products/add">
-                            <button>ADD PRODUCTS</button>
+                            <button className="add-button">ADD PRODUCTS</button>
                         </Link>
                         {
                             this.state.products.map(product => (
