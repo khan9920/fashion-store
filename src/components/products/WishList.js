@@ -115,7 +115,7 @@ export default class WishList extends Component {
                                 </a>
                                 <p className="qty">Quantity</p>
                                 <input type="number" placeholder="5" name="quantity" onChange={this.handleChange} />
-                                <button type="button" onClick={() => this.onAddToCart(product.product._id)}>ADD TO CART</button>
+                                <button className="action-button" type="button" onClick={() => this.onAddToCart(product.product._id)}>ADD TO CART</button>
                             </div>
                         ))
                     }

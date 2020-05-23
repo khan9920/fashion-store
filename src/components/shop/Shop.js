@@ -54,15 +54,41 @@ export default class Shop extends Component {
         if (URL === '') {
             this.productsService.getProducts()
                 .then(result => {
+                    let products = [];
+                    result.data.products.map(product => {
+                        if (product.discount === 0) {
+                            products.push(product);
+                        }
+    
+                       
+                        product.price = product.price - (product.price * (product.discount / 100));
+    
+                        products.push(product);
+                    });
+
+
                     this.setState({
-                        products: result.data.products
+                        products
                     })
                 })
         } else {
             this.productsService.getProductsFiltered(URL)
                 .then(result => {
+                    let products = [];
+                    result.data.products.map(product => {
+                        if (product.discount === 0) {
+                            products.push(product);
+                        }
+    
+                       
+                        product.price = product.price - (product.price * (product.discount / 100));
+    
+                        products.push(product);
+                    });
+
+
                     this.setState({
-                        products: result.data.products
+                        products
                     })
                 })
         }
@@ -73,8 +99,24 @@ export default class Shop extends Component {
     onFilter(category) {
         this.productsService.getProductsFiltered(category)
             .then(result => {
+                // this.setState({
+                //     products: result.data.products
+                // })
+                let products = [];
+                result.data.products.map(product => {
+                    if (product.discount === 0) {
+                        products.push(product);
+                    }
+
+                   
+                    product.price = product.price - (product.price * (product.discount / 100));
+
+                    products.push(product);
+                });
+
+
                 this.setState({
-                    products: result.data.products
+                    products
                 })
             })
     }

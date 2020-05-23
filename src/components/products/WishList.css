@@ -56,20 +56,23 @@
       text-align: center;
   }
 
-button {
-    background-color: #000;
-    border: 1px solid #000;
-    color: white;
-    font-size: 14px;
-    padding: 14px 32px;
-    margin-right: 20px;
-}
+.action-button  {
+   
+        background-color: #000;
+        border: 1px solid #000;
+        color: white;
+        font-size: 14px;
+        padding: 14px 32px;
+        margin-right: 20px;
+    }
+    
+.action-button:hover {
+        background-color: #ffffff;
+        border: 1px solid #000;
+        color: #000;
+        font-size: 14px;
+        padding: 14px 32px;
+        margin-right: 20px;
+    }
 
-button:hover {
-    background-color: #ffffff;
-    border: 1px solid #000;
-    color: #000;
-    font-size: 14px;
-    padding: 14px 32px;
-    margin-right: 20px;
-}
+
