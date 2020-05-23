@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ProductsService } from '../../services/productsService';
 import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
+import './_ProductList.css';
 
 export default class _AddProduct extends Component {
 
@@ -132,7 +133,9 @@ export default class _AddProduct extends Component {
 
                                     <div className="col-md-6 image-section">
                                         <label>Product Image</label>
+                                        <div className="image-Section-image">
                                         {image}
+                                        </div>
                                         <label className="custom-file-upload">
                                             <input type="file" className="button-input" name="productImage" onChange={this.handleFile} placeholder="Product Image" />
                                     Upload Image
