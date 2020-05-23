@@ -8,12 +8,11 @@ import './user-management.css';
 import {InputText} from "primereact/inputtext";
 import {Button} from "primereact/button";
 import DeleteDialog from "./delete-dialog";
-import {Growl} from "primereact/growl";
+import AddUserModal from "./add-user-modal";
 
 class UserManagement extends Component {
   // Services
   userService;
-  growl;
   editModel;
 
   constructor() {
@@ -37,6 +36,8 @@ class UserManagement extends Component {
       recordsTotal: 0,
       // modal dialog state
       dialogVisible: false,
+      addUserModalVisible: false,
+      // ----------------------
       addUserModal: false,
       first: 0,
       // selected User Id state
@@ -93,7 +94,7 @@ class UserManagement extends Component {
     }, () => {this.setData()}); // callback method to call the set data function
   }
 
-  actionTemplate = (rowData, column) => {
+  actionTemplate = (rowData) => {
     return <div>
       <Button type="button" className="mr-2" icon="pi pi-pencil" onClick={() => this.buttonClick(rowData._id, false)}/>
       <Button type="button" icon="pi pi-ban" onClick={() => this.buttonClick(rowData._id, true)}/>
@@ -128,16 +129,16 @@ class UserManagement extends Component {
   delete = () => {
     this.setData();
     this.setState({
-      dialogVisible: false
+      dialogVisible: false,
+      addUserModalVisible: false
     });
-    this.growl.show({ severity: 'success', summary: 'User Deleted' });
   }
 
   render() {
     const header = <div>
       <div className="row">
         <div className="col-3 text-right">
-          <Button className="user-add-btn py-1" id="submit" type="submit" label="Add New User" style={{marginRight: '.25em'}}/>
+          <Button className="user-add-btn py-1" id="submit" onClick={() => {this.setState({addUserModalVisible: true})}} type="submit" label="Add New User" style={{marginRight: '.25em'}}/>
         </div>
         <div className="col-9">
           <InputText onKeyUp={this.search}/>
@@ -151,9 +152,8 @@ class UserManagement extends Component {
         {/*Modal to delete users */}
         <DeleteDialog id={this.state.id} show={this.state.dialogVisible}
                       onHide={() => {this.setState({dialogVisible: false})}}
-                      onClick={this.delete}/>
-        {/*Growl to show the required message*/}
-        <Growl ref={(el) => this.growl = el} />
+                      close={() => {this.delete()}}/>
+        <AddUserModal show={this.state.addUserModalVisible} onHide={() => {this.setState({addUserModalVisible: false})}} close={() => {this.delete()}}/>
         <React.Fragment>
           <div className="row">
             <LeftPanel/>
@@ -171,11 +171,11 @@ class UserManagement extends Component {
                          sortField={this.state.users.email}
                          header={ header }
               >
-                <Column field="email" header="Email" sortable={true}/>
-                <Column field="first_name" header="First Name" sortable={true}/>
-                <Column field="last_name" header="Last Name" sortable={true}/>
-                <Column field="role" header="Role" sortable={true}/>
-                <Column body={this.actionTemplate} header="Actions" className="text-center"/>
+                <Column field="email" header="Email" style={{width: "30%"}} sortable={true}/>
+                <Column field="first_name" header="First Name" style={{width: "20%"}} sortable={true}/>
+                <Column field="last_name" header="Last Name" style={{width: "20%"}} sortable={true}/>
+                <Column field="role" header="Role" className="text-center" style={{width: "10%"}} sortable={true}/>
+                <Column body={this.actionTemplate} header="Actions" style={{width: "20%"}} className="text-center"/>
 
               </DataTable>
             </div>

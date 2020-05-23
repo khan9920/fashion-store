@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import Modal from "react-bootstrap/Modal";
 import {Button} from "primereact/button";
 import {UserService} from "../../services/userService";
+import {Growl} from "primereact/growl";
+
 
 class deleteDialog extends Component {
   // services
   userService;
+  growl;
+
   constructor(props) {
     super(props);
     this.userService = new UserService();
@@ -14,17 +18,20 @@ class deleteDialog extends Component {
   delete = () => {
     this.userService.deleteUser(this.props.id).then(data => {
       if (data.data.status) {
-        return this.props.onHide;
+        this.growl.show({ severity: 'success', summary: 'User Deleted' });
+        return this.props.close();
+      } else {
+        this.growl.show({ severity: 'error', summary: data.data.msg });
+        return this.props.onHide();
       }
     });
-
-    return this.props.onHide();
   }
   render() {
     return (
       <div>
+        <Growl ref={(el) => this.growl = el} />
         <Modal
-          {...this.props}
+          show={this.props.show} onHide={this.props.onHide}
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >

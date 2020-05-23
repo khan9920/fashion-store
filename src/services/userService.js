@@ -30,6 +30,10 @@ export class UserService {
     return (await axios.post(API.URL + 'users/user', data));
   }
 
+  async createEmployee(data) {
+    return (await axios.post(API.URL + 'users/employee', data, this.setHeaders()));
+  }
+
   async getAllUsers(limit, page, search, column, order, status, roles) {
     return (await axios.get(API.URL +
       `users/roles?limit=${limit}&page=${page + 1}&search=${search}&column=${column}&order=${order}&status=${status}&roles[]${roles}`,

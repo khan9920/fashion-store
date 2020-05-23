@@ -28,7 +28,6 @@ class MyComponent extends Component {
   }
 
   formUpdate = (event) => {
-    console.log(event.target.name);
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
