@@ -3,6 +3,7 @@ import { ProductsService } from '../../services/productsService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import { Link } from 'react-router-dom';
 import './_ProductList.css';
+import { API } from '../../data/api';
 
 export default class _ProductsList extends Component {
     productsService;
@@ -56,7 +57,7 @@ export default class _ProductsList extends Component {
                                 <div className="product-card" key={product._id}>
                                     <div className="row">
                                         <div className="col-md-2">
-                                            <img className="productImage" alt="" src={'http://localhost:4000/' + product.productImage}></img>
+                                            <img className="productImage" alt="" src={API.IMAGEURL + product.productImage}></img>
                                         </div>
                                         <div className="col-md-10">
                                             <div className="row">

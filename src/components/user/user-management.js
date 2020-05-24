@@ -42,6 +42,7 @@ class UserManagement extends Component {
       rows: 2,
       recordsTotal: 0,
       isLoading: true,
+      paginationLoading: false,
       // modal dialog state
       dialogVisible: false,
       role: this.userRole,
@@ -59,6 +60,9 @@ class UserManagement extends Component {
   }
 
   setData() { // method used to set data to the data table
+    this.setState({
+      paginationLoading: true
+    });
     this.userService.getAllUsers( // make http call using the user service
       this.state.pagination.limit,
       this.state.pagination.page,
@@ -73,6 +77,7 @@ class UserManagement extends Component {
           this.setState({
             users: data.data.data, // add data to data table
             isLoading: false,
+            paginationLoading: false,
             recordsTotal: data.data.recordsTotal // add records total for pagination
           })
         } else {
@@ -125,13 +130,13 @@ class UserManagement extends Component {
   search = (event) => {
     this.setState({
       pagination: {
-        limit: this.state.pagination.limit,
-        page: this.state.pagination.page,
         search: event.target.value,
-        column: this.state.pagination.column,
-        status: this.state.pagination.status,
-        roles: this.state.pagination.roles,
-        order: this.state.pagination.order,
+        limit: 10,
+        page: 0,
+        column: 1,
+        order: 'asc',
+        status: 'active',
+        roles: this.userRole === 'Admin' ? 'roles%5B%5D=Store%20Manager&roles%5B%5D=User&roles%5B%5D=Admin' : 'roles%5B%5D=User'
       }
     }, () => {this.setData()});
   };
@@ -147,13 +152,16 @@ class UserManagement extends Component {
   render() {
     const header = <div>
       <div className="row">
+        <div className="col-1">
+          {this.state.paginationLoading && <i className="pi pi-spin pi-spinner" style={{fontSize: '2rem'}}/>}
+        </div>
         <div className="col-3 text-right">
           { this.state.role === 'Admin' && <Button className="user-add-btn py-1" id="submit"
                   onClick={() => {this.setState({addUserModalVisible: true})}}
                   type="submit" label="Add New User"
                   style={{marginRight: '.25em'}}/>}
         </div>
-        <div className="col-9 d-flex justify-content-end">
+        <div className="col-8 d-flex justify-content-end">
           <div className="row">
             <div className="col-3 mt-2">
               Search:
@@ -177,7 +185,7 @@ class UserManagement extends Component {
         <AddUserModal show={this.state.addUserModalVisible} onHide={() => {this.setState({addUserModalVisible: false})}} close={() => {this.delete()}}/>
         <React.Fragment>
           <div className="row">
-            <LeftPanel/>
+            {!this.state.isLoading && <LeftPanel/>}
             <div className="col-md-10">
               {!this.state.isLoading && <DataTable totalRecords={120}
                          value={this.state.users}

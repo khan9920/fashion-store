@@ -3,6 +3,7 @@ import { ProductsService } from '../../services/productsService';
 import './Products.css';
 import Title from '../Title';
 import Spinner from './../Spinner';
+import { API } from '../../data/api';
 
 export default class Products extends Component {
 
@@ -57,7 +58,7 @@ export default class Products extends Component {
                                 <div key={product._id} className="col-md-4">
                                     <a onClick={() => this.onLoad(product._id)}>
                                         <div className="product-view-wrapper">
-                                            <img className="productImage image" alt="" src={'http://localhost:4000/' + product.productImage} />
+                                            <img className="productImage image" alt="" src={API.IMAGEURL + product.productImage} />
                                             <h5>{product.name}</h5>
                                             {!product.isDiscounted &&
                                                 <p><span className="actual-price">LKR {product.price}.00</span> </p>

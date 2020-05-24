@@ -126,7 +126,7 @@ class EditUser extends Component {
               <form onSubmit={this.editUser}>
 
                 <div className="row mt-4">
-                  <div className="col-3">
+                  <div className="col-3 text-right">
                     <p>Email</p>
                   </div>
                   <div className="col-9">
@@ -143,7 +143,7 @@ class EditUser extends Component {
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-3">
+                  <div className="col-3 text-right">
                     <p>First Name</p>
                   </div>
                   <div className="col-9">
@@ -161,7 +161,7 @@ class EditUser extends Component {
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-3">
+                  <div className="col-3 text-right">
                     <p>Last Name</p>
                   </div>
                   <div className="col-9">
@@ -178,7 +178,7 @@ class EditUser extends Component {
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-3">
+                  <div className="col-3 text-right">
                     <p>Role</p>
                   </div>
                   <div className="col-9">
@@ -197,7 +197,7 @@ class EditUser extends Component {
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-3">
+                  <div className="col-3 text-right">
                     <p>Phone</p>
                   </div>
                   <div className="col-9">

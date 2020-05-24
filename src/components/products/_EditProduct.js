@@ -3,6 +3,7 @@ import { ProductsService } from '../../services/productsService';
 import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import './_ProductList.css';
+import { API } from '../../data/api';
 
 export default class _EditProduct extends Component {
     productsService;
@@ -109,7 +110,7 @@ export default class _EditProduct extends Component {
         if (this.state.file) {
             image = <img className="productImage1" alt='productI' src={this.state.file}></img>
         } else {
-            image = <img className="productImage1" alt='productI' src={'http://localhost:4000/' + this.state.productImage}></img>
+            image = <img className="productImage1" alt='productI' src={API.IMAGEURL  + this.state.productImage}></img>
         }
 
         return (
