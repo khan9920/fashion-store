@@ -3,9 +3,7 @@ import { ProductsService } from '../../services/productsService';
 import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import './_ProductList.css';
-
-import Snackbar from '@material-ui/core/Snackbar';
-import Alert from '@material-ui/lab/Alert';
+import Spinner from './../Spinner';
 
 
 export default class _AddProduct extends Component {
@@ -29,7 +27,7 @@ export default class _AddProduct extends Component {
             file: null,
             categories: []
         }
-
+        this.isLoading = true;
         this.handleChange = this.handleChange.bind(this);
         this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +36,7 @@ export default class _AddProduct extends Component {
     componentDidMount() {
         this.categoriesService.getCategories()
             .then(results => {
+                this.isLoading = false;
                 this.setState({
                     categories: results.data.categories
                 })
@@ -75,8 +74,11 @@ export default class _AddProduct extends Component {
                 fd.append("description", data.description);
                 fd.append("discount", data.discount);
 
+                
                 this.productsService.addProduct(fd).then(result => {
+                    
                     if (result.data.message === 'Success') {
+                        this.isLoading = false;
                         this.props.history.push('/store/admin/products');
                     };
                 });
@@ -96,6 +98,10 @@ export default class _AddProduct extends Component {
 
         return (
             <React.Fragment>
+                {this.isLoading &&
+                    <Spinner></Spinner>
+                }
+                {!this.isLoading &&
                 <div className="row">
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
@@ -158,6 +164,7 @@ export default class _AddProduct extends Component {
                         </div>
                     </div>
                 </div>
+    }
             </React.Fragment >
         )
     }

@@ -4,6 +4,7 @@ import LeftPanel from './../leftpanel/_leftPanel';
 import { Link } from 'react-router-dom';
 import './_ProductList.css';
 import { API } from '../../data/api';
+import Spinner from './../Spinner';
 
 export default class _ProductsList extends Component {
     productsService;
@@ -14,11 +15,13 @@ export default class _ProductsList extends Component {
         this.state = {
             products: []
         }
+        this.isLoading = true;
     }
 
     componentDidMount() {
         this.productsService.getProducts()
             .then(results => {
+                this.isLoading = false;
                 this.setState({
                     products: results.data.products
                 })
@@ -46,6 +49,10 @@ export default class _ProductsList extends Component {
     render() {
         return (
             <React.Fragment>
+                 {this.isLoading &&
+                    <Spinner></Spinner>
+                }
+                {!this.isLoading &&
                 <div className="row">
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
@@ -100,6 +107,7 @@ export default class _ProductsList extends Component {
                         }
                     </div>
                 </div>
+    }
             </React.Fragment>
         )
     }

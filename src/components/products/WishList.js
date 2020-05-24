@@ -5,6 +5,7 @@ import Title from '../Title';
 import './WishList.css';
 import Spinner from './../Spinner';
 import { JwtService } from "./../../services/jwtService";
+import { API } from '../../data/api';
 
 export default class WishList extends Component {
 
@@ -110,7 +111,7 @@ export default class WishList extends Component {
                             <div key={product.product._id} className="col-md-4">
                                 <a onClick={() => this.onRemoveItem(product.product._id)}>
                                     <div className="product-view-wrapper">
-                                        <img className="productImage image" alt="" src={'http://localhost:4000/' + product.product.productImage} />
+                                        <img className="productImage image" alt="" src={API.IMAGEURL + product.product.productImage} />
                                         <h5>{product.product.name}</h5>
                                         <p>LKR {product.product.price}.00</p>
                                         <div className="middle">
