@@ -33,15 +33,20 @@ export default class Navbar extends Component {
     navigateToLogin = () => {
         this.setState({
             redirect: false,
-            redirectToLogin: true
-        }, () => {console.log(this.state.redirectToLogin)});
+        }, this.setRedirectState())
     }
+
+    setRedirectState() {
+        this.setState({
+            redirectToLogin: true
+        });
+    }
+
+
 
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
-                {this.state.redirectToLogin && <Redirect to="/login" />}
-                {this.state.redirect && <Redirect to="/" />}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
@@ -61,13 +66,13 @@ export default class Navbar extends Component {
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
-                        { ( this.state.role !== 'Admin' && this.state.role !== 'Store Manager') && <Link to='/store/wishlist'>
+                        { ( this.state.role && this.state.role === 'User') && <Link to='/store/wishlist'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="heart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 WISHLIST
                             </li>
                         </Link> }
-                        { ( this.state.role !== 'Admin' && this.state.role !== 'Store Manager') &&  <Link to='/store/cart'>
+                        { ( this.state.role && this.state.role === 'User') &&  <Link to='/store/cart'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 CART
@@ -81,6 +86,9 @@ export default class Navbar extends Component {
                         </li>
                     </ul>
                 </div>
+                {console.log(this.state.redirectToLogin)}
+                {this.state.redirectToLogin && <Redirect to="/login" />}
+                {this.state.redirect && <Redirect to="/" />}
             </div>
         )
     }
