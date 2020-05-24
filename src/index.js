@@ -12,8 +12,6 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Register from "./components/register/register";
-import UserManagement from "./components/user/user-management";
-import EditUser from "./components/user/edit-user";
 
 function getLogin() {
   const jwtService = new JwtService();

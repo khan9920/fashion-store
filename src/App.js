@@ -18,19 +18,7 @@ import Cart from './components/products/Cart';
 import Products from './components/products/Products';
 import Product from './components/products/Product';
 
-import _ProductsList from './components/products/_ProductsList';
-import _AddProduct from './components/products/_AddProduct';
-import _EditProduct from './components/products/_EditProduct';
-
-// categories
-import _Categories from './components/categories/_CategoriesList';
-import _AddCategory from './components/categories/_AddCategory';
-import _EditCategory from './components/categories/_EditCategory';
-
-
 import Default from './components/Default';
-import UserManagement from "./components/user/user-management";
-import EditUser from "./components/user/edit-user";
 import {JwtService} from "./services/jwtService";
 import Admin from "./Admin";
 
