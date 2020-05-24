@@ -3,6 +3,7 @@ import { CartService } from '../../services/cartService';
 import './Cart.css';
 import Title from './../Title';
 import Spinner from './../Spinner';
+import { JwtService } from "./../../services/jwtService";
 
 export default class Cart extends Component {
 
@@ -11,18 +12,22 @@ export default class Cart extends Component {
     constructor(props) {
         super(props);
         this.cartService = new CartService();
-        this.userID = '5e92596655db39060cdde135';
+        this.jwtService = new JwtService();
         this.state = {
             products: [],
             grandTotal: '',
+            userID: '',
             isLoading: true,
             isEmpty: true
         }
     }
 
     componentDidMount() {
+        this.setState({
+            userID: this.jwtService.validateToken().id,
+        })
         setTimeout(() => {
-            this.cartService.getCart(this.userID)
+            this.cartService.getCart(this.state.userID)
                 .then(result => {
 
                     let updatedResult = result.data.cart.products;
@@ -49,7 +54,7 @@ export default class Cart extends Component {
 
     onDelete(productID) {
         if (window.confirm('Are you sure..?')) {
-            this.cartService.updateCart(productID, this.userID)
+            this.cartService.updateCart(productID, this.state.userID)
                 .then(result => {
                     if (result.data.status === 'success') {
 
