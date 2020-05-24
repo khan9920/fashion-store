@@ -25,18 +25,6 @@ function getLogin() {
 }
 
 
-// function validateUser (){
-//   const jwtService = new JwtService();
-//   const token = jwtService.validateToken();
-//   if (!token) {
-//     return <Redirect to="/store"/>
-//   } else if (token.role === 'User') {
-//     return <Redirect to="/store"/>
-//   } else {
-//     return <App/>
-//   }
-// }
-
 ReactDOM.render(
   <ProductProvider>
     <Router>

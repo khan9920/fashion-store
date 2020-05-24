@@ -32,6 +32,7 @@ import Default from './components/Default';
 import UserManagement from "./components/user/user-management";
 import EditUser from "./components/user/edit-user";
 import {JwtService} from "./services/jwtService";
+import Admin from "./Admin";
 
 class App extends Component {
   // services
@@ -46,6 +47,18 @@ class App extends Component {
     this.userService = new JwtService();
   }
 
+  validateUser = () => {
+    const jwtService = new JwtService();
+    const token = jwtService.validateToken();
+    if (!token) {
+      return <Redirect to="/store"/>
+    } else if (token.role === 'User') {
+      return <Redirect to="/store"/>
+    } else {
+      return <Admin/>
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -56,25 +69,13 @@ class App extends Component {
             <Route exact path="/store/shop" component={Shop} />
             <Route exact path="/store/about" component={About} />
             <Route exact path="/store/contact" component={Contact} />
-
-            <Route exact path="/store/admin/categories" component={_Categories} />
-            <Route exact path="/store/admin/categories/add" component={_AddCategory} />
-            <Route exact path="/store/admin/categories/edit/:id" component={_EditCategory} />
-
             <Route exact path="/store/product/:id" component={Product} />
             <Route exact path="/store/wishlist" component={Wishlist} />
             <Route exact path="/store/cart/" component={Cart} />
 
-            <Route exact path="/store/admin/products" component={_ProductsList} />
-            <Route path="/store/admin/products/add" component={_AddProduct} />
-            <Route path="/store/admin/products/edit/:id" component={_EditProduct} />
-
-            <Route exact path="/store/admin/users" component={UserManagement}/>
-            <Route exact path="/store/admin/users/:id" component={EditUser} />
-
-            {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
-
-            {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}
+            <Route path = "/store/admin">
+              {this.validateUser}
+            </Route>
 
             <Route component={Default} />
           </Switch>
