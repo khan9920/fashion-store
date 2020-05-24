@@ -55,7 +55,9 @@ class UserManagement extends Component {
     };
 
     this.editModel = null;
+  }
 
+  componentDidMount(): void {
     this.setData();
   }
 

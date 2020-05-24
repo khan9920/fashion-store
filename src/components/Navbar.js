@@ -30,18 +30,18 @@ export default class Navbar extends Component {
         });
     };
 
-    navigateToLogin = () => {
-        this.setState({
+    navigateToLogin = async () => {
+        await this.setState({
             redirect: false,
             redirectToLogin: true
-        }, () => {console.log(this.state.redirectToLogin)});
+        }, () => {
+            console.log(this.state.redirectToLogin)
+        });
     }
 
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
-                {this.state.redirectToLogin && <Redirect to="/login" />}
-                {this.state.redirect && <Redirect to="/" />}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
@@ -81,6 +81,9 @@ export default class Navbar extends Component {
                         </li>
                     </ul>
                 </div>
+                {console.log(this.state.redirectToLogin)}
+                {this.state.redirectToLogin && <Redirect to="/login" />}
+                {this.state.redirect && <Redirect to="/" />}
             </div>
         )
     }
