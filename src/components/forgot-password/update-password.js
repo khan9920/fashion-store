@@ -6,10 +6,8 @@ import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext";
 import {Link, Redirect} from "react-router-dom";
 import {Button} from "primereact/button";
-import {Password} from 'primereact/password';
-import './register.css';
 
-class Register extends Component {
+class UpdatePassword extends Component {
   // Services
   userService;
   growl;
@@ -21,13 +19,12 @@ class Register extends Component {
     this.jwtService = new JwtService();
     this.state = {
       email: '',
+      oldPassword: '',
       password: '',
-      first_name: '',
-      last_name: '',
-      phone: '',
+      confPass: '',
       isLoading: false,
-      shouldRedirect: false
     }
+
   }
 
   formUpdate = (event) => {
@@ -38,48 +35,51 @@ class Register extends Component {
     })
   };
 
-  signUp = (event) => {
+  updatePassword = (event) => {
     event.preventDefault();
+    if (this.state.password !== this.state.confPass) {
+      this.growl.show({ severity: 'error', summary: 'Please check confirm password' });
+      return;
+    }
     this.setState({
       isLoading: true,
-      shouldRedirect: false
     });
     // get User details
     const user = {
       email: this.state.email,
-      password: this.state.password,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      phone: this.state.phone
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.password
     }
     // api call to login
-    this.userService.createUser(user).then(data => {
+    this.userService.updatePassword(user).then(data => {
       this.setState({
         isLoading: false
       });
       if (data.data) {
         if (data.data.status) {
-          this.growl.show({ severity: 'success', summary: 'Account Created Successfully' });
+          this.growl.show({ severity: 'success', summary: 'Password Changed', details: 'Proceed to login' });
           this.setState({
-            shouldRedirect: true
-          });
-
+            email: '',
+            oldPassword: '',
+            password: '',
+            confPass: '',
+          })
           return;
           // this.props.history.push('/store')
         } else {
-          this.growl.show({ severity: 'error', summary: 'User Creation Failed', detail: data.data.msg });
+          this.growl.show({ severity: 'error', summary: 'Error', detail: data.data.msg });
         }
       }
     }).catch(error => {
       this.setState({
         isLoading: false
       });
-      this.growl.show({ severity: 'error', summary: 'Connection Error', detail: 'Please try again' });
+      this.growl.show({ severity: 'error', summary: 'Update Failed'});
     })
   }
 
   buttonValidation() {
-    return this.state.email === '' || this.state.password.length < 8 || this.state.first_name === '' || this.state.last_name === '';
+    return this.state.email === '' || this.state.password.length < 8  || this.state.confPass === '' || this.state.oldPassword === '';
   }
 
   render() {
@@ -88,7 +88,7 @@ class Register extends Component {
       backgroundSize: 'cover'
     };
 
-    const header = <h2>Register</h2>;
+    const header = <h2>Update Password</h2>;
     return (
       <div style={sectionStyle} className="background">
         <Growl ref={(el) => this.growl = el} />
@@ -98,15 +98,15 @@ class Register extends Component {
               <div className="col-md-6 card-div">
                 <Card header={header}>
                   <div className="text-center">
-                    <p>Welcome to the fashion store</p>
+                    <p>Remember to keep credentials safe</p>
                   </div>
-                  <form onSubmit={this.signUp}>
+                  <form onSubmit={this.updatePassword}>
 
                     <div className="row mt-4">
-                      <div className="col-3">
+                      <div className="col-2">
                         <p>Email</p>
                       </div>
-                      <div className="col-9">
+                      <div className="col-10">
                         <span className="p-float-label">
                           <InputText className="text_field"
                                      type="email"
@@ -120,86 +120,64 @@ class Register extends Component {
                     </div>
 
                     <div className="row mt-4">
-                      <div className="col-3">
+                      <div className="col-2">
+                        <p>Generated Password</p>
+                      </div>
+                      <div className="col-10">
+                        <span className="p-float-label">
+                          <InputText className="text_field"
+                                     type="password"
+                                     id="oldPassword"
+                                     value={this.state.oldPassword}
+                                     name="oldPassword"
+                                     onChange={this.formUpdate} />
+                          <label htmlFor="in">Generated Password</label>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="row mt-4">
+                      <div className="col-2">
                         <p>password</p>
                       </div>
-                      <div className="col-9">
+                      <div className="col-10">
                         <span className="p-float-label">
-                          <Password
-                            className="text_field
-                            " name="password"
-                            required={true}
-                            value={this.state.password}
-                            onChange={this.formUpdate} />
+                          <InputText type="password" className="text_field" id="password"
+                                     value={this.state.password}
+                                     name="password"
+                                     onChange={this.formUpdate} />
                           <label htmlFor="in">password</label>
                         </span>
                       </div>
                     </div>
 
                     <div className="row mt-4">
-                      <div className="col-3">
-                        <p>First Name</p>
+                      <div className="col-2">
+                        <p>Confirm Password</p>
                       </div>
-                      <div className="col-9">
+                      <div className="col-10">
                         <span className="p-float-label">
-                          <InputText className="text_field"
-                                     type="text"
-                                     id="first_name"
-                                     value={this.state.first_name}
-                                     name="first_name"
-                                     required={true}
+                          <InputText type="password" className="text_field" id="confPass"
+                                     value={this.state.confPass}
+                                     name="confPass"
                                      onChange={this.formUpdate} />
-                          <label htmlFor="in">First Name</label>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-3">
-                        <p>Last Name</p>
-                      </div>
-                      <div className="col-9">
-                        <span className="p-float-label">
-                          <InputText className="text_field"
-                                     id="last_name"
-                                     value={this.state.last_name}
-                                     name="last_name"
-                                     required={true}
-                                     onChange={this.formUpdate} />
-                          <label htmlFor="in">Last Name</label>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-3">
-                        <p>Phone</p>
-                      </div>
-                      <div className="col-9">
-                        <span className="p-float-label">
-                          <InputText className="text_field"
-                                     type="number"
-                                     id="phone"
-                                     value={this.state.phone}
-                                     name="phone"
-                                     required={true}
-                                     onChange={this.formUpdate} />
-                          <label htmlFor="in">Phone</label>
+                          <label htmlFor="in">Confirm Password</label>
                         </span>
                       </div>
                     </div>
                     <div className="row mt-4">
-                      <div className="col-12">
-                        Already Have an Account? <Link className="link" to='/login'>
+                      <div className="col-md-2">
+                        <Link className="link" to='/login'>
                           Login
                         </Link>
                       </div>
+
                     </div>
 
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
-                        <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Sign Up"
-                                icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
+                        <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
+                                icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{ marginRight: '.25em' }} />
                       </div>
                     </div>
                   </form>
@@ -209,11 +187,11 @@ class Register extends Component {
             </div>
           </div>
         </div>
-        { this.state.shouldRedirect && <Redirect to="/login"/> }
+        {this.state.isLoggedIn && <Redirect to="/" />}
 
       </div>
     );
   }
 }
 
-export default Register;
+export default UpdatePassword;

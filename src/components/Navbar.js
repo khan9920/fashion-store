@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import StylesNavBar from './styles/NavBarStyles';
-import {JwtService} from "../services/jwtService";
-import {Redirect} from "react-router-dom";
+import { JwtService } from "../services/jwtService";
+import { Redirect } from "react-router-dom";
 import './navbar.css';
 
 export default class Navbar extends Component {
@@ -16,7 +16,8 @@ export default class Navbar extends Component {
         this.state = {
             isLoggedIn: token,
             role: token ? token.role : null,
-            redirect: false
+            redirect: false,
+            redirectToLogin: false
         }
     }
 
@@ -29,15 +30,33 @@ export default class Navbar extends Component {
         });
     };
 
+    navigateToLogin = () => {
+        this.setState({
+            redirect: false,
+        }, this.setRedirectState())
+    }
+
+    setRedirectState() {
+        this.setState({
+            redirectToLogin: true
+        });
+    }
+
+
+
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
-                {this.state.redirect && <Redirect to="/"/>}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-10 nav-list">
                     <ul style={StylesNavBar.navListUl}>
+                        {
+                            (this.state.role && this.state.role !== 'User') && <li style={StylesNavBar.linkList}>
+                                <Link to='/store/admin/products' style={StylesNavBar.linktListA}>Dashboard</Link>
+                            </li>
+                        }
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/shop' style={StylesNavBar.linktListA}>SHOP</Link>
                         </li>
@@ -47,22 +66,29 @@ export default class Navbar extends Component {
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
-                        <li style={StylesNavBar.linkList}>
-                            { this.state.isLoggedIn ?
-                              <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                                  Sign Out
-                            </a> :
-                              <Link to="/login" style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                                  Login
-                              </Link>}
-                        </li>
-                        {(this.state.role === 'User') &&
+                        { ( this.state.role && this.state.role === 'User') && <Link to='/store/wishlist'>
+                            <li style={StylesNavBar.linkList}>
+                                <ion-icon name="heart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                WISHLIST
+                            </li>
+                        </Link> }
+                        { ( this.state.role && this.state.role === 'User') &&  <Link to='/store/cart'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                            CART
-                        </li>}
+                                CART
+                            </li>
+                        </Link>}
+                        <li style={StylesNavBar.linkList}>
+                            <a className="link" onClick={this.state.isLoggedIn ? this.signOut : this.navigateToLogin}
+                               style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                {this.state.isLoggedIn ? 'Sign Out' : 'Login'}
+                            </a>
+                        </li>
                     </ul>
                 </div>
+                {console.log(this.state.redirectToLogin)}
+                {this.state.redirectToLogin && <Redirect to="/login" />}
+                {this.state.redirect && <Redirect to="/" />}
             </div>
         )
     }

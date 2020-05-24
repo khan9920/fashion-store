@@ -13,4 +13,8 @@ export class JwtService {
   deleteToken() {
     localStorage.removeItem('token');
   }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 }

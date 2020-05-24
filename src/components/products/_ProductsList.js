@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { ProductsService } from '../../services/productsService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import { Link } from 'react-router-dom';
+import './_ProductList.css';
+import { API } from '../../data/api';
+import Spinner from './../Spinner';
 
 export default class _ProductsList extends Component {
     productsService;
@@ -12,11 +15,13 @@ export default class _ProductsList extends Component {
         this.state = {
             products: []
         }
+        this.isLoading = true;
     }
 
     componentDidMount() {
         this.productsService.getProducts()
             .then(results => {
+                this.isLoading = false;
                 this.setState({
                     products: results.data.products
                 })
@@ -44,18 +49,22 @@ export default class _ProductsList extends Component {
     render() {
         return (
             <React.Fragment>
+                 {this.isLoading &&
+                    <Spinner></Spinner>
+                }
+                {!this.isLoading &&
                 <div className="row">
                     <LeftPanel></LeftPanel>
                     <div className="col-md-10">
                         <Link to="/store/admin/products/add">
-                            <button>ADD PRODUCTS</button>
+                            <button className="add-button">ADD PRODUCTS</button>
                         </Link>
                         {
                             this.state.products.map(product => (
                                 <div className="product-card" key={product._id}>
                                     <div className="row">
                                         <div className="col-md-2">
-                                            <img className="productImage" alt="" src={'http://localhost:4000/' + product.productImage}></img>
+                                            <img className="productImage" alt="" src={API.IMAGEURL + product.productImage}></img>
                                         </div>
                                         <div className="col-md-10">
                                             <div className="row">
@@ -98,6 +107,7 @@ export default class _ProductsList extends Component {
                         }
                     </div>
                 </div>
+    }
             </React.Fragment>
         )
     }

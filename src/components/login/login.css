@@ -44,3 +44,13 @@
 .link:hover{
     color: black;
 }
+
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 150%;
+    }
+    /* For mobile phones: */
+    .card-div {
+        transform: translate(0, 30%)
+    }
+}

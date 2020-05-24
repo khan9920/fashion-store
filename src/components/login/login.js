@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Card} from 'primereact/card';
+import React, { Component } from 'react';
+import { Card } from 'primereact/card';
 import './login.css';
-import {Button} from 'primereact/button';
-import {InputText} from 'primereact/inputtext';
-import {UserService} from "../../services/userService";
-import {Link, Redirect} from 'react-router-dom';
-import {JwtService} from "../../services/jwtService";
-import {Growl} from 'primereact/growl';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { UserService } from "../../services/userService";
+import { Link, Redirect } from 'react-router-dom';
+import { JwtService } from "../../services/jwtService";
+import { Growl } from 'primereact/growl';
 
 
 class MyComponent extends Component {
@@ -23,13 +23,13 @@ class MyComponent extends Component {
       email: '',
       password: '',
       isLoading: false,
-      isLoggedIn: this.jwtService.validateToken()
+      isLoggedIn: this.jwtService.validateToken(),
+      isForgotPassword: false
     }
-    console.log(this.state.isLoggedIn);
+
   }
 
   formUpdate = (event) => {
-    console.log(event.target.name);
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
@@ -55,6 +55,12 @@ class MyComponent extends Component {
       });
       if (data.data) {
         if (data.data.status) {
+          if (data.data.data.is_forgot_pass == 'true') {
+            this.setState({
+              isForgotPassword: true
+            });
+            return;
+          }
           this.growl.show({ severity: 'success', summary: 'Welcome' });
           localStorage.setItem('token', data.data.token);
           this.setState({
@@ -136,7 +142,7 @@ class MyComponent extends Component {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link className="link" to='/'>
+                        <Link className="link" to='/forgot-password'>
                           Forgot Password
                         </Link>
                       </div>
@@ -146,7 +152,7 @@ class MyComponent extends Component {
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
                         <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
-                                icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{marginRight: '.25em'}}/>;
+                          icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{ marginRight: '.25em' }} />
                       </div>
                     </div>
                   </form>
@@ -156,7 +162,8 @@ class MyComponent extends Component {
             </div>
           </div>
         </div>
-        { this.state.isLoggedIn && <Redirect to="/"/> }
+        {this.state.isLoggedIn && <Redirect to="/" />}
+        {this.state.isForgotPassword && <Redirect to="/update-password" />}
 
       </div>
     );

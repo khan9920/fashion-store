@@ -1,0 +1,17 @@
+.row-contact {
+    text-align: center;
+}
+
+.row-contact iframe {
+    width: 100%;;
+}
+
+.wrapper-contact-details {
+    text-align: left;
+}
+
+.wrapper-contact-details .title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
