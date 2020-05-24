@@ -4,6 +4,7 @@ import './Cart.css';
 import Title from './../Title';
 import Spinner from './../Spinner';
 import { JwtService } from "./../../services/jwtService";
+import {API} from "../../data/api";
 
 export default class Cart extends Component {
 
@@ -104,7 +105,7 @@ export default class Cart extends Component {
                                 <tr key={result.product._id}>
                                     <td>
                                         <div className="product-wrapper">
-                                            <img className="productImage" alt='productI' src={'http://localhost:4000/' + result.product.productImage} />
+                                            <img className="productImage" alt='productI' src={API.IMAGEURL + result.product.productImage} />
                                             <div className="product-text-wrapper">
                                                 <p className="text-1">{result.product.name}</p>
                                                 <p className="text-2"><span>Category :</span> {result.product.category}</p>
