@@ -10,6 +10,10 @@ button:focus {
     padding-top: 5%;
 }
 
+img {
+    height: 450px;
+}
+
 .common-single-product-page h2 {
     font-weight: 600;
     margin: 0;
@@ -88,7 +92,7 @@ button:focus {
 }
 
 .strike-through-text {
-    text-decoration: line-through;  
+    text-decoration: line-through;
   }
 
 
