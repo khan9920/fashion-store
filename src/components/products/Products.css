@@ -20,7 +20,7 @@
     opacity: 1;
     display: block;
     width: 100%;
-    height: auto;
+    height: 300px;
     transition: .5s ease;
     backface-visibility: hidden;
   }
@@ -36,11 +36,11 @@
     -ms-transform: translate(-50%, -50%);
     text-align: center;
 }
-  
+
 .product-view-wrapper:hover .image {
     opacity: 0.3;
 }
-  
+
 .product-view-wrapper:hover .middle {
     opacity: 1;
 }
@@ -53,7 +53,7 @@
   }
 
   .strike-through-text {
-    text-decoration: line-through;  
+    text-decoration: line-through;
   }
 
   .actual-price {
