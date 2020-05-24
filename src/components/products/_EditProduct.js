@@ -4,6 +4,7 @@ import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import './_ProductList.css';
 import { API } from '../../data/api';
+import {Button} from "primereact/button";
 
 export default class _EditProduct extends Component {
     productsService;
@@ -22,7 +23,8 @@ export default class _EditProduct extends Component {
             description: '',
             discount: '',
             file: null,
-            categories: []
+            categories: [],
+            isLoading: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -93,10 +95,18 @@ export default class _EditProduct extends Component {
                 fd.append("quantity", data.quantity);
                 fd.append("description", data.description);
                 fd.append("discount", data.discount);
+                
+                this.setState({
+                    isLoading: true,
+                  });
 
                 this.productsService.updateProduct(fd, this.state._id)
                     .then(result => {
                         if (result.data.message === 'Success') {
+                            
+                            this.setState({
+                                isLoading: false,
+                            });
                             this.props.history.push('/store/admin/products');
                         };
                     })
@@ -170,8 +180,10 @@ export default class _EditProduct extends Component {
 
                                     <div className="col-md-12 button-col">
                                         <input type="hidden" name="id" value={this.state._id} />
-                                        <button type="submit">SAVE</button>
-                                        {/* <button type="button">CANCEL</button> */}
+                                        <Button  disabled={ this.state.isLoading} 
+                                        type="submit" label="SAVE"
+                                            icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"}
+                                            style={{marginRight: '.25em'}}/>
                                     </div>
                                 </div>
                             </form>

@@ -51,8 +51,9 @@
     margin-bottom: 10px;
 }
 
-.button-col button {
+.button-col Button {
     float: right;
+    
 }
 
 .image-section input {

@@ -4,6 +4,7 @@ import { CategoriesService } from '../../services/categoriesService';
 import LeftPanel from './../leftpanel/_leftPanel';
 import './_ProductList.css';
 import Spinner from './../Spinner';
+import {Button} from "primereact/button";
 
 
 export default class _AddProduct extends Component {
@@ -25,7 +26,8 @@ export default class _AddProduct extends Component {
             description: '',
             discount: 0,
             file: null,
-            categories: []
+            categories: [],
+            isLoading: false,
         }
         this.isLoading = true;
         this.handleChange = this.handleChange.bind(this);
@@ -74,11 +76,16 @@ export default class _AddProduct extends Component {
                 fd.append("description", data.description);
                 fd.append("discount", data.discount);
 
-                
+                this.setState({
+                    isLoading: true,
+                  });
+
                 this.productsService.addProduct(fd).then(result => {
                     
                     if (result.data.message === 'Success') {
-                        this.isLoading = false;
+                         this.setState({
+                            isLoading: false,
+                         });
                         this.props.history.push('/store/admin/products');
                     };
                 });
@@ -157,7 +164,12 @@ export default class _AddProduct extends Component {
 
                                     <div className="col-md-12 button-col">
                                         <input type="hidden" name="id" value={this.state._id} />
-                                        <button type="submit">SAVE</button>
+                                        {/* <button type="submit">SAVE</button> */}
+                                        <Button  disabled={ this.state.isLoading} 
+                                        type="submit" label="Create Product"
+                                            icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"}
+                                            style={{marginRight: '.25em'}}/>
+             
                                     </div>
                                 </div>
                             </form>
