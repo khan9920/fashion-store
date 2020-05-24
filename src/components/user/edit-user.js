@@ -37,10 +37,10 @@ class EditUser extends Component {
           const user = data.data.data;
           this.setStateMethod(user);
         } else {
-          console.log('error');
+          this.growl.show({ severity: 'error', summary: 'Cannot Find User', detail: data.data.msg });
         }
       } else {
-        console.log('error');
+        this.growl.show({ severity: 'error', summary: 'Cannot Find User'});
       }
     })
   }
@@ -91,7 +91,7 @@ class EditUser extends Component {
           this.growl.show({ severity: 'success', summary: 'User Edit Success' });
         } else {
           this.componentDidMount();
-          this.growl.show({ severity: 'error', summary: data.data.msg, });
+          this.growl.show({ severity: 'error', summary: 'Edit Failed', detail: data.data.msg });
         }
       } else {
         this.componentDidMount();
@@ -104,7 +104,8 @@ class EditUser extends Component {
     return this.state.email === '' ||
       this.state.first_name === '' ||
       this.state.last_name === '' ||
-      this.state.role === '';
+      this.state.role === '' ||
+      this.state.phone === '';
   }
 
 
@@ -216,7 +217,7 @@ class EditUser extends Component {
                 <div className="row mt-3">
                   <div className="col-6 btn-wrapper">
                     <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit"
-                            type="submit" label="Create Account"
+                            type="submit" label="Update User"
                             icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"}
                             style={{marginRight: '.25em'}}/>;
                   </div>

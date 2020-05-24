@@ -99,7 +99,8 @@ class AddUserModal extends Component {
       this.state.password.length < 8 ||
       this.state.first_name === '' ||
       this.state.last_name === '' ||
-      this.state.role === '';
+      this.state.role === '' ||
+      this.state.phone === '';
   }
 
   render() {

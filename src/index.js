@@ -12,6 +12,8 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Register from "./components/register/register";
+import UserManagement from "./components/user/user-management";
+import EditUser from "./components/user/edit-user";
 
 function getLogin() {
   const jwtService = new JwtService();
@@ -21,6 +23,19 @@ function getLogin() {
     return <Login/>
   }
 }
+
+
+// function validateUser (){
+//   const jwtService = new JwtService();
+//   const token = jwtService.validateToken();
+//   if (!token) {
+//     return <Redirect to="/store"/>
+//   } else if (token.role === 'User') {
+//     return <Redirect to="/store"/>
+//   } else {
+//     return <App/>
+//   }
+// }
 
 ReactDOM.render(
   <ProductProvider>

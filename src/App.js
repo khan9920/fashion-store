@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-
+import { Switch, Route, Redirect } from 'react-router-dom';
 // main css
 import './App.css';
 
@@ -28,19 +27,23 @@ import _Categories from './components/categories/_CategoriesList';
 import _AddCategory from './components/categories/_AddCategory';
 import _EditCategory from './components/categories/_EditCategory';
 
-// import Login from './components/login/login';
 
 import Default from './components/Default';
 import UserManagement from "./components/user/user-management";
 import EditUser from "./components/user/edit-user";
+import {JwtService} from "./services/jwtService";
 
 class App extends Component {
+  // services
+  userService;
 
   constructor(props) {
     super(props);
     this.state = {
-      isAdmin: false
+      isAdmin: false,
+      shouldComponentLoad: false
     }
+    this.userService = new JwtService();
   }
 
   render() {
@@ -66,7 +69,7 @@ class App extends Component {
             <Route path="/store/admin/products/add" component={_AddProduct} />
             <Route path="/store/admin/products/edit/:id" component={_EditProduct} />
 
-            <Route exact path="/store/admin/users" component={UserManagement} />
+            <Route exact path="/store/admin/users" component={UserManagement}/>
             <Route exact path="/store/admin/users/:id" component={EditUser} />
 
             {/* {!this.state.isAdmin && <Redirect to="/store"/>} */}

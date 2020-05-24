@@ -36,7 +36,6 @@ class Register extends Component {
     this.setState({
       [name]: value
     })
-    console.log(this.state);
   };
 
   signUp = (event) => {

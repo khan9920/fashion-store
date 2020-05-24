@@ -16,7 +16,8 @@ export default class Navbar extends Component {
         this.state = {
             isLoggedIn: token,
             role: token ? token.role : null,
-            redirect: false
+            redirect: false,
+            redirectToLogin: false
         }
     }
 
@@ -25,13 +26,21 @@ export default class Navbar extends Component {
         this.setState({
             isLoggedIn: false,
             role: null,
-            redirect: false
+            redirect: true
         });
     };
+
+    navigateToLogin = () => {
+        this.setState({
+            redirect: false,
+            redirectToLogin: true
+        }, () => {console.log(this.state.redirectToLogin)});
+    }
 
     render() {
         return (
             <div className="row" style={StylesNavBar.row}>
+                {this.state.redirectToLogin && <Redirect to="/login" />}
                 {this.state.redirect && <Redirect to="/" />}
                 <div className="col-md-2">
                     <Link to='/store' style={StylesNavBar.brand}>Life Etc.</Link>
@@ -65,19 +74,11 @@ export default class Navbar extends Component {
                             </li>
                         </Link>}
                         <li style={StylesNavBar.linkList}>
-                            {this.state.isLoggedIn ?
-                                <a className="link" onClick={this.signOut} style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                                  Sign Out
-                            </a> :
-                                <Link to="/login" style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                                  Login
-                              </Link>}
+                            <a className="link" onClick={this.state.isLoggedIn ? this.signOut : this.navigateToLogin}
+                               style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                                {this.state.isLoggedIn ? 'Sign Out' : 'Login'}
+                            </a>
                         </li>
-                        {/* {(this.state.role === 'User') &&
-                            <li style={StylesNavBar.linkList}>
-                                <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
-                            CART
-                        </li>} */}
                     </ul>
                 </div>
             </div>
