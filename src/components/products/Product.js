@@ -43,7 +43,8 @@ export default class Product extends Component {
             comment: '',
             // user_ID: '',
             reviews: [],
-            ratingAvg: ''
+            ratingAvg: '',
+            user_name: ''
         }
         this.isLoading = true;
         this.handleChange = this.handleChange.bind(this);
@@ -85,6 +86,13 @@ export default class Product extends Component {
 
         if (localStorage.getItem('token')) {
             this.user_ID = this.jwtService.validateToken().id;
+            this.productsService.getUser(this.user_ID).then(result => {
+                let user_name = result.data.user.first_name + ' ' + result.data.user.last_name;
+                user_name = user_name.toUpperCase();
+                this.setState({
+                    user_name
+                });
+            })
         } else {
             this.user_ID = '';
         }
@@ -154,7 +162,7 @@ export default class Product extends Component {
         const review = {
             productID: this.props.match.params.id,
             userID: this.state.user_ID,
-            name: 'John Watson',
+            name: this.state.user_name,
             rating: this.state.rating,
             comment: this.state.comment
         };
@@ -251,13 +259,11 @@ export default class Product extends Component {
                                 </form>
                             }
                         </div>
-                        {this.user_ID &&
-                            <div className="col-md-12">
-                                <p className="product-desc">REVIEWS</p>
-                            </div>
-                        }
+                        <div className="col-md-12">
+                            <p className="product-desc">REVIEWS</p>
+                        </div>
 
-                        {this.user_ID && this.state.reviews.map(review => (
+                        {this.state.reviews.map(review => (
                             <div className="col-md-3" key={review._id}>
                                 <div class="riview-card">
                                     <p class="name">{review.name}</p>
