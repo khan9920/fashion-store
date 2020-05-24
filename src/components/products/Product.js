@@ -200,7 +200,7 @@ export default class Product extends Component {
                 {!this.isLoading &&
                     <div className="row common-single-product-page">
                         <div className="col-md-6">
-                            <img className="productImage" alt='productI' src={API.IMAGEURL + this.state.productImage} />
+                            <img className="productImage prdImg" alt='productI' src={API.IMAGEURL + this.state.productImage} />
                         </div>
                         <div className="col-md-6">
                             <div className="row">
