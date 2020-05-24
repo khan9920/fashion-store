@@ -30,14 +30,19 @@ export default class Navbar extends Component {
         });
     };
 
-    navigateToLogin = async () => {
-        await this.setState({
+    navigateToLogin = () => {
+        this.setState({
             redirect: false,
+        }, this.setRedirectState())
+    }
+
+    setRedirectState() {
+        this.setState({
             redirectToLogin: true
-        }, () => {
-            console.log(this.state.redirectToLogin)
         });
     }
+
+
 
     render() {
         return (
