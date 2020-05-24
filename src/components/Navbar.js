@@ -66,21 +66,21 @@ export default class Navbar extends Component {
                         <li style={StylesNavBar.linkList}>
                             <Link to='/store/contact' style={StylesNavBar.linktListA}>CONTACT</Link>
                         </li>
-                        { ( this.state.role && this.state.role === 'User') && <Link to='/store/wishlist'>
+                        {(this.state.role && this.state.role === 'User') && <Link to='/store/wishlist'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="heart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 WISHLIST
                             </li>
-                        </Link> }
-                        { ( this.state.role && this.state.role === 'User') &&  <Link to='/store/cart'>
+                        </Link>}
+                        {(this.state.role && this.state.role === 'User') && <Link to='/store/cart'>
                             <li style={StylesNavBar.linkList}>
                                 <ion-icon name="cart-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 CART
                             </li>
                         </Link>}
                         <li style={StylesNavBar.linkList}>
-                            <a className="link" onClick={this.state.isLoggedIn ? this.signOut : this.navigateToLogin}
-                               style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
+                            <a href="" className="link" onClick={this.state.isLoggedIn ? this.signOut : this.navigateToLogin}
+                                style={StylesNavBar.linktListA}> <ion-icon name="person-circle-outline" style={StylesNavBar.linkListIcon}></ion-icon>
                                 {this.state.isLoggedIn ? 'Sign Out' : 'Login'}
                             </a>
                         </li>
