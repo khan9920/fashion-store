@@ -12,6 +12,7 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Register from "./components/register/register";
+import ForgotPassword from "./components/forgot-password/forgot-password";
 
 function getLogin() {
   const jwtService = new JwtService();
@@ -19,6 +20,15 @@ function getLogin() {
     return <Redirect to = '/store'/>
   } else {
     return <Login/>
+  }
+}
+
+function getForgotPage() {
+  const jwtService = new JwtService();
+  if (jwtService.validateToken()) {
+    return <Redirect to = '/store'/>
+  } else {
+    return <ForgotPassword/>
   }
 }
 
@@ -31,6 +41,9 @@ ReactDOM.render(
       </Route>
       <Route exact path="/login">
         {getLogin()}
+      </Route>
+      <Route exact path="/forgot-password">
+        {getForgotPage()}
       </Route>
       <Route exact path="/register" component={Register}/>
       <Route path="/store" component={App}/>

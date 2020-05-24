@@ -54,4 +54,10 @@ export class UserService {
     return (await axios.put(API.URL +
     'users', body, this.setHeaders()));
   }
+
+  async forgotPassword(user) {
+    return (await axios.put(API.URL +
+      'users/password/reset', user
+    ));
+  }
 }

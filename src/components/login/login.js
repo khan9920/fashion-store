@@ -135,7 +135,7 @@ class MyComponent extends Component {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link className="link" to='/'>
+                        <Link className="link" to='/forgot-password'>
                           Forgot Password
                         </Link>
                       </div>
@@ -145,7 +145,7 @@ class MyComponent extends Component {
                     <div className="row mt-3">
                       <div className="col-6 btn-wrapper">
                         <Button className="py-1" disabled={this.buttonValidation() || this.state.isLoading} id="submit" type="submit" label="Save"
-                          icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{ marginRight: '.25em' }} />;
+                          icon={this.state.isLoading ? "pi pi-spin pi-spinner" : "pi pi-check"} style={{ marginRight: '.25em' }} />
                       </div>
                     </div>
                   </form>
