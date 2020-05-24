@@ -20,7 +20,7 @@
     opacity: 1;
     display: block;
     width: 100%;
-    height: 300px;
+    height: 350px;
     transition: .5s ease;
     backface-visibility: hidden;
   }
