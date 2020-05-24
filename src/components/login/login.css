@@ -1,0 +1,56 @@
+.card-div {
+    margin: 0 auto;
+    transform: translate(0, 80%)
+}
+
+.btn-wrapper {
+    margin: 0 auto;
+}
+
+.p-card {
+    border-radius: 7px;
+}
+
+.background {
+    height: 100vh;
+    background-image: url("/public/img/background-image.jpg");
+}
+
+.p-card-header {
+    background: #fafafa;
+    text-align: center;
+    border-radius: 7px 7px 0 0 ;
+    padding: 10px;
+}
+
+.text_field {
+    width: 100%;
+}
+
+#submit {
+    width: 100%;
+}
+
+.p-button {
+    background: black !important;
+    border-radius: 8px !important;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover{
+    color: black;
+}
+
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 150%;
+    }
+    /* For mobile phones: */
+    .card-div {
+        transform: translate(0, 30%)
+    }
+}

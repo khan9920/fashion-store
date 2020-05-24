@@ -1,6 +1,9 @@
 .product-card {
     background-color: #fff;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
@@ -11,8 +14,8 @@
 }
 
 .product-card img {
-    width: 75px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .actions p ion-icon {
@@ -48,12 +51,17 @@
     margin-bottom: 10px;
 }
 
-.button-col button {
+.button-col Button {
     float: right;
+    
 }
 
 .image-section input {
     border: none;
+}
+
+.image-Section-image {
+   width: 400px;
 }
 
 .button-col button {
@@ -72,4 +80,52 @@
     padding: 5px 15px;
     border-radius: 5px;
     font-weight: 600;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+select{
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+.custom-file-upload {
+    background-color: #000;
+    border: 2px solid #000;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 200px;
+}
+
+.productImage1 {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 10px;
+}
+
+.add-button  {
+   
+    background-color: #000;
+    border: 1px solid #000;
+    color: white;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+
+.add-button:hover {
+    background-color: #ffffff;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 14px;
+    padding: 14px 32px;
+    border-radius: 5px;
+    margin-right: 20px;
 }

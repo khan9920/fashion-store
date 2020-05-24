@@ -7,10 +7,9 @@ export default class _leftPanel extends Component {
         return (
             <div className="col-md-2 left-panel">
                 <ul>
-                    <li><Link to='/admin/products'>PRODUCTS</Link></li>
-                    <li><Link to='/admin/categories'>CATEGORIES</Link></li>
-                    <li><Link to='/admin/sales'>SALES</Link></li>
-                    <li><Link to='/admin/uses'>USERS</Link></li>
+                    <li><Link to='/store/admin/products'><i className="pi pi-tags mr-2"/>PRODUCTS</Link></li>
+                    <li><Link to='/store/admin/categories'><i className="pi pi-list mr-2"/>CATEGORIES</Link></li>
+                    <li><Link to='/store/admin/users'><i className="pi pi-user mr-2"/>USERS</Link></li>
                 </ul>
             </div>
         )
