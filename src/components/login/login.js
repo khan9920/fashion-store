@@ -23,7 +23,8 @@ class MyComponent extends Component {
       email: '',
       password: '',
       isLoading: false,
-      isLoggedIn: this.jwtService.validateToken()
+      isLoggedIn: this.jwtService.validateToken(),
+      isForgotPassword: false
     }
 
   }
@@ -54,6 +55,12 @@ class MyComponent extends Component {
       });
       if (data.data) {
         if (data.data.status) {
+          if (data.data.data.is_forgot_pass == 'true') {
+            this.setState({
+              isForgotPassword: true
+            });
+            return;
+          }
           this.growl.show({ severity: 'success', summary: 'Welcome' });
           localStorage.setItem('token', data.data.token);
           this.setState({
@@ -156,6 +163,7 @@ class MyComponent extends Component {
           </div>
         </div>
         {this.state.isLoggedIn && <Redirect to="/" />}
+        {this.state.isForgotPassword && <Redirect to="/update-password" />}
 
       </div>
     );

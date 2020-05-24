@@ -13,6 +13,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import Register from "./components/register/register";
 import ForgotPassword from "./components/forgot-password/forgot-password";
+import UpdatePassword from "./components/forgot-password/update-password";
 
 function getLogin() {
   const jwtService = new JwtService();
@@ -32,6 +33,15 @@ function getForgotPage() {
   }
 }
 
+function updatePassword() {
+  const jwtService = new JwtService();
+  if (jwtService.validateToken()) {
+    return <Redirect to = '/store'/>
+  } else {
+    return <UpdatePassword/>
+  }
+}
+
 
 ReactDOM.render(
   <ProductProvider>
@@ -44,6 +54,9 @@ ReactDOM.render(
       </Route>
       <Route exact path="/forgot-password">
         {getForgotPage()}
+      </Route>
+      <Route exact path="/update-password">
+        {updatePassword()}
       </Route>
       <Route exact path="/register" component={Register}/>
       <Route path="/store" component={App}/>

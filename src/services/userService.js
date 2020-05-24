@@ -60,4 +60,10 @@ export class UserService {
       'users/password/reset', user
     ));
   }
+
+  async updatePassword(user) {
+    return (await axios.put(API.URL +
+      'users/password', user
+    ))
+  }
 }
