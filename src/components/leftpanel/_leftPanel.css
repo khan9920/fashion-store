@@ -1,5 +1,7 @@
 .left-panel{
-    background-color: #000;     
+    background-color: #000;
+    height: 30vh;
+    border-radius: 5px;
 }
 
 ul {
@@ -20,4 +22,8 @@ ul li a {
 
 ul li a:hover {
     color:  azure;
+}
+
+i {
+    fill: white;
 }
